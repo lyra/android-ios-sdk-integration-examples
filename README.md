@@ -1,2 +1,5 @@
-# android-ios-sdk-integration-examples
-Lyra SDK Mobile integration examples using Kotlin, java, SWIFT and objective-C
+# Lyra Mobile SDK Integration Examples
+
+This aim of this repository is to present several examples of Lyra Mobile SDK integration.
+
+That will be enriched very soon :)
