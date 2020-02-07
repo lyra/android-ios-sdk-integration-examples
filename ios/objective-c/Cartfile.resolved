@@ -1,0 +1,7 @@
+binary "https://mymavenrepo.com/repo/v1RtJ4WqYLq71mA60Upl/sdk-ios-payment_INTE.json" "0.0.1"
+github "AssistoLab/DropDown" "v2.3.4"
+github "CosmicMind/Material" "2.16.4"
+github "CosmicMind/Motion" "3.1.2"
+github "SnapKit/SnapKit" "4.2.0"
+github "getsentry/sentry-cocoa" "4.3.2"
+# binary "https://mymavenrepo.com/repo/v1RtJ4WqYLq71mA60Upl/PayCardsRecognizer.json" "0.0.1"

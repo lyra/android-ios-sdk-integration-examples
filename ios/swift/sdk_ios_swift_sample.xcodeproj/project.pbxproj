@@ -1,0 +1,412 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A64E2F4C2333B46D00E2578A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E2F4B2333B46D00E2578A /* AppDelegate.swift */; };
+		A64E2F4E2333B46D00E2578A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E2F4D2333B46D00E2578A /* ViewController.swift */; };
+		A64E2F512333B46D00E2578A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64E2F4F2333B46D00E2578A /* Main.storyboard */; };
+		A64E2F532333B47100E2578A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A64E2F522333B47100E2578A /* Assets.xcassets */; };
+		A64E2F562333B47100E2578A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64E2F542333B47100E2578A /* LaunchScreen.storyboard */; };
+		A64E2F652333BDA400E2578A /* Sentry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A64E2F5F2333BDA400E2578A /* Sentry.framework */; };
+		A64E2F662333BDA400E2578A /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A64E2F602333BDA400E2578A /* SnapKit.framework */; };
+		A64E2F672333BDA400E2578A /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A64E2F612333BDA400E2578A /* Material.framework */; };
+		A64E2F682333BDA400E2578A /* LyraPaymentSDK_INTE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A64E2F622333BDA400E2578A /* LyraPaymentSDK_INTE.framework */; };
+		A64E2F692333BDA400E2578A /* DropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A64E2F632333BDA400E2578A /* DropDown.framework */; };
+		A64E2F6A2333BDA400E2578A /* Motion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A64E2F642333BDA400E2578A /* Motion.framework */; };
+		A64E2F6D2333C2E600E2578A /* ServerCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E2F6C2333C2E600E2578A /* ServerCommunication.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A64E2F482333B46D00E2578A /* sdk_ios_swift_sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sdk_ios_swift_sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A64E2F4B2333B46D00E2578A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A64E2F4D2333B46D00E2578A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A64E2F502333B46D00E2578A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A64E2F522333B47100E2578A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A64E2F552333B47100E2578A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A64E2F572333B47100E2578A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A64E2F5F2333BDA400E2578A /* Sentry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sentry.framework; path = Carthage/Build/iOS/Sentry.framework; sourceTree = "<group>"; };
+		A64E2F602333BDA400E2578A /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		A64E2F612333BDA400E2578A /* Material.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Material.framework; path = Carthage/Build/iOS/Material.framework; sourceTree = "<group>"; };
+		A64E2F622333BDA400E2578A /* LyraPaymentSDK_INTE.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LyraPaymentSDK_INTE.framework; path = Carthage/Build/iOS/LyraPaymentSDK_INTE.framework; sourceTree = "<group>"; };
+		A64E2F632333BDA400E2578A /* DropDown.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropDown.framework; path = Carthage/Build/iOS/DropDown.framework; sourceTree = "<group>"; };
+		A64E2F642333BDA400E2578A /* Motion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Motion.framework; path = Carthage/Build/iOS/Motion.framework; sourceTree = "<group>"; };
+		A64E2F6C2333C2E600E2578A /* ServerCommunication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerCommunication.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A64E2F452333B46D00E2578A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A64E2F652333BDA400E2578A /* Sentry.framework in Frameworks */,
+				A64E2F662333BDA400E2578A /* SnapKit.framework in Frameworks */,
+				A64E2F672333BDA400E2578A /* Material.framework in Frameworks */,
+				A64E2F682333BDA400E2578A /* LyraPaymentSDK_INTE.framework in Frameworks */,
+				A64E2F692333BDA400E2578A /* DropDown.framework in Frameworks */,
+				A64E2F6A2333BDA400E2578A /* Motion.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A64E2F3F2333B46D00E2578A = {
+			isa = PBXGroup;
+			children = (
+				A64E2F4A2333B46D00E2578A /* sdk_ios_swift_sample */,
+				A64E2F492333B46D00E2578A /* Products */,
+				A64E2F5E2333BDA400E2578A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A64E2F492333B46D00E2578A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A64E2F482333B46D00E2578A /* sdk_ios_swift_sample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A64E2F4A2333B46D00E2578A /* sdk_ios_swift_sample */ = {
+			isa = PBXGroup;
+			children = (
+				A64E2F4B2333B46D00E2578A /* AppDelegate.swift */,
+				A64E2F4D2333B46D00E2578A /* ViewController.swift */,
+				A64E2F4F2333B46D00E2578A /* Main.storyboard */,
+				A64E2F522333B47100E2578A /* Assets.xcassets */,
+				A64E2F542333B47100E2578A /* LaunchScreen.storyboard */,
+				A64E2F572333B47100E2578A /* Info.plist */,
+				A64E2F6C2333C2E600E2578A /* ServerCommunication.swift */,
+			);
+			path = sdk_ios_swift_sample;
+			sourceTree = "<group>";
+		};
+		A64E2F5E2333BDA400E2578A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A64E2F632333BDA400E2578A /* DropDown.framework */,
+				A64E2F622333BDA400E2578A /* LyraPaymentSDK_INTE.framework */,
+				A64E2F612333BDA400E2578A /* Material.framework */,
+				A64E2F642333BDA400E2578A /* Motion.framework */,
+				A64E2F5F2333BDA400E2578A /* Sentry.framework */,
+				A64E2F602333BDA400E2578A /* SnapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A64E2F472333B46D00E2578A /* sdk_ios_swift_sample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A64E2F5A2333B47100E2578A /* Build configuration list for PBXNativeTarget "sdk_ios_swift_sample" */;
+			buildPhases = (
+				A64E2F442333B46D00E2578A /* Sources */,
+				A64E2F452333B46D00E2578A /* Frameworks */,
+				A64E2F462333B46D00E2578A /* Resources */,
+				A64E2F6B2333BDDC00E2578A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sdk_ios_swift_sample;
+			productName = sdk_ios_swift_sample;
+			productReference = A64E2F482333B46D00E2578A /* sdk_ios_swift_sample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A64E2F402333B46D00E2578A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Lyra Network";
+				TargetAttributes = {
+					A64E2F472333B46D00E2578A = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = A64E2F432333B46D00E2578A /* Build configuration list for PBXProject "sdk_ios_swift_sample" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A64E2F3F2333B46D00E2578A;
+			productRefGroup = A64E2F492333B46D00E2578A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A64E2F472333B46D00E2578A /* sdk_ios_swift_sample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A64E2F462333B46D00E2578A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A64E2F562333B47100E2578A /* LaunchScreen.storyboard in Resources */,
+				A64E2F532333B47100E2578A /* Assets.xcassets in Resources */,
+				A64E2F512333B46D00E2578A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A64E2F6B2333BDDC00E2578A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/DropDown.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/LyraPaymentSDK_INTE.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Material.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Motion.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Sentry.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A64E2F442333B46D00E2578A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A64E2F4E2333B46D00E2578A /* ViewController.swift in Sources */,
+				A64E2F6D2333C2E600E2578A /* ServerCommunication.swift in Sources */,
+				A64E2F4C2333B46D00E2578A /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A64E2F4F2333B46D00E2578A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A64E2F502333B46D00E2578A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A64E2F542333B47100E2578A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A64E2F552333B47100E2578A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A64E2F582333B47100E2578A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A64E2F592333B47100E2578A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A64E2F5B2333B47100E2578A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YNB6GZCAPQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = sdk_ios_swift_sample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lyra.sdk-ios-swift-sample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A64E2F5C2333B47100E2578A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YNB6GZCAPQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = sdk_ios_swift_sample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lyra.sdk-ios-swift-sample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A64E2F432333B46D00E2578A /* Build configuration list for PBXProject "sdk_ios_swift_sample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A64E2F582333B47100E2578A /* Debug */,
+				A64E2F592333B47100E2578A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A64E2F5A2333B47100E2578A /* Build configuration list for PBXNativeTarget "sdk_ios_swift_sample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A64E2F5B2333B47100E2578A /* Debug */,
+				A64E2F5C2333B47100E2578A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A64E2F402333B46D00E2578A /* Project object */;
+}

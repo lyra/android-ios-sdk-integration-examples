@@ -1,0 +1,443 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A60916E623310D85003198A4 /* ServerCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = A60916E523310D85003198A4 /* ServerCommunication.m */; };
+		A6611608232F8ABA0095728E /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6611602232F8ABA0095728E /* Material.framework */; };
+		A661160A232F8ABA0095728E /* Motion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6611604232F8ABA0095728E /* Motion.framework */; };
+		A661160B232F8ABA0095728E /* DropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6611605232F8ABA0095728E /* DropDown.framework */; };
+		A6611610232FAF560095728E /* DropDown.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6611605232F8ABA0095728E /* DropDown.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A6611611232FAF560095728E /* LyraPaymentSDK_INTE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6611606232F8ABA0095728E /* LyraPaymentSDK_INTE.framework */; };
+		A6611612232FAF560095728E /* LyraPaymentSDK_INTE.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6611606232F8ABA0095728E /* LyraPaymentSDK_INTE.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A6611614232FAF560095728E /* Material.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6611602232F8ABA0095728E /* Material.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A6611616232FAF560095728E /* Motion.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6611604232F8ABA0095728E /* Motion.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A6611617232FAF560095728E /* Sentry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6611601232F8ABA0095728E /* Sentry.framework */; };
+		A6611618232FAF560095728E /* Sentry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6611601232F8ABA0095728E /* Sentry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A6611619232FAF560095728E /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6611603232F8ABA0095728E /* SnapKit.framework */; };
+		A661161A232FAF560095728E /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6611603232F8ABA0095728E /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A6CD4C3E232F806700E13EEC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD4C3D232F806700E13EEC /* AppDelegate.m */; };
+		A6CD4C41232F806700E13EEC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD4C40232F806700E13EEC /* ViewController.m */; };
+		A6CD4C44232F806700E13EEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CD4C42232F806700E13EEC /* Main.storyboard */; };
+		A6CD4C46232F806900E13EEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6CD4C45232F806900E13EEC /* Assets.xcassets */; };
+		A6CD4C49232F806900E13EEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CD4C47232F806900E13EEC /* LaunchScreen.storyboard */; };
+		A6CD4C4C232F806900E13EEC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD4C4B232F806900E13EEC /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A661161B232FAF560095728E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A6611612232FAF560095728E /* LyraPaymentSDK_INTE.framework in Embed Frameworks */,
+				A6611610232FAF560095728E /* DropDown.framework in Embed Frameworks */,
+				A6611616232FAF560095728E /* Motion.framework in Embed Frameworks */,
+				A661161A232FAF560095728E /* SnapKit.framework in Embed Frameworks */,
+				A6611618232FAF560095728E /* Sentry.framework in Embed Frameworks */,
+				A6611614232FAF560095728E /* Material.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A60916E423310D85003198A4 /* ServerCommunication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerCommunication.h; sourceTree = "<group>"; };
+		A60916E523310D85003198A4 /* ServerCommunication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServerCommunication.m; sourceTree = "<group>"; };
+		A6611601232F8ABA0095728E /* Sentry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sentry.framework; path = Carthage/Build/iOS/Sentry.framework; sourceTree = "<group>"; };
+		A6611602232F8ABA0095728E /* Material.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Material.framework; path = Carthage/Build/iOS/Material.framework; sourceTree = "<group>"; };
+		A6611603232F8ABA0095728E /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		A6611604232F8ABA0095728E /* Motion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Motion.framework; path = Carthage/Build/iOS/Motion.framework; sourceTree = "<group>"; };
+		A6611605232F8ABA0095728E /* DropDown.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropDown.framework; path = Carthage/Build/iOS/DropDown.framework; sourceTree = "<group>"; };
+		A6611606232F8ABA0095728E /* LyraPaymentSDK_INTE.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LyraPaymentSDK_INTE.framework; path = Carthage/Build/iOS/LyraPaymentSDK_INTE.framework; sourceTree = "<group>"; };
+		A6CD4C39232F806700E13EEC /* sdk_ios_objectivec_sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sdk_ios_objectivec_sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6CD4C3C232F806700E13EEC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A6CD4C3D232F806700E13EEC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A6CD4C3F232F806700E13EEC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A6CD4C40232F806700E13EEC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A6CD4C43232F806700E13EEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A6CD4C45232F806900E13EEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A6CD4C48232F806900E13EEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A6CD4C4A232F806900E13EEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6CD4C4B232F806900E13EEC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A6CD4C36232F806700E13EEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6611611232FAF560095728E /* LyraPaymentSDK_INTE.framework in Frameworks */,
+				A6611617232FAF560095728E /* Sentry.framework in Frameworks */,
+				A6611619232FAF560095728E /* SnapKit.framework in Frameworks */,
+				A6611608232F8ABA0095728E /* Material.framework in Frameworks */,
+				A661160A232F8ABA0095728E /* Motion.framework in Frameworks */,
+				A661160B232F8ABA0095728E /* DropDown.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A6611600232F8ABA0095728E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A6611605232F8ABA0095728E /* DropDown.framework */,
+				A6611606232F8ABA0095728E /* LyraPaymentSDK_INTE.framework */,
+				A6611602232F8ABA0095728E /* Material.framework */,
+				A6611604232F8ABA0095728E /* Motion.framework */,
+				A6611601232F8ABA0095728E /* Sentry.framework */,
+				A6611603232F8ABA0095728E /* SnapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A6CD4C30232F806700E13EEC = {
+			isa = PBXGroup;
+			children = (
+				A6CD4C3B232F806700E13EEC /* sdk_ios_objectivec_sample */,
+				A6CD4C3A232F806700E13EEC /* Products */,
+				A6611600232F8ABA0095728E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A6CD4C3A232F806700E13EEC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A6CD4C39232F806700E13EEC /* sdk_ios_objectivec_sample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A6CD4C3B232F806700E13EEC /* sdk_ios_objectivec_sample */ = {
+			isa = PBXGroup;
+			children = (
+				A6CD4C3C232F806700E13EEC /* AppDelegate.h */,
+				A6CD4C3D232F806700E13EEC /* AppDelegate.m */,
+				A6CD4C3F232F806700E13EEC /* ViewController.h */,
+				A6CD4C40232F806700E13EEC /* ViewController.m */,
+				A6CD4C42232F806700E13EEC /* Main.storyboard */,
+				A6CD4C45232F806900E13EEC /* Assets.xcassets */,
+				A6CD4C47232F806900E13EEC /* LaunchScreen.storyboard */,
+				A6CD4C4A232F806900E13EEC /* Info.plist */,
+				A6CD4C4B232F806900E13EEC /* main.m */,
+				A60916E423310D85003198A4 /* ServerCommunication.h */,
+				A60916E523310D85003198A4 /* ServerCommunication.m */,
+			);
+			path = sdk_ios_objectivec_sample;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A6CD4C38232F806700E13EEC /* sdk_ios_objectivec_sample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A6CD4C4F232F806900E13EEC /* Build configuration list for PBXNativeTarget "sdk_ios_objectivec_sample" */;
+			buildPhases = (
+				A6CD4C35232F806700E13EEC /* Sources */,
+				A6CD4C36232F806700E13EEC /* Frameworks */,
+				A6CD4C37232F806700E13EEC /* Resources */,
+				A661160D232F8AE80095728E /* ShellScript */,
+				A661161B232FAF560095728E /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sdk_ios_objectivec_sample;
+			productName = "objectiveC-sdk-integration-example";
+			productReference = A6CD4C39232F806700E13EEC /* sdk_ios_objectivec_sample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A6CD4C31232F806700E13EEC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Lyra Network";
+				TargetAttributes = {
+					A6CD4C38232F806700E13EEC = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = A6CD4C34232F806700E13EEC /* Build configuration list for PBXProject "sdk_ios_objectivec_sample" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A6CD4C30232F806700E13EEC;
+			productRefGroup = A6CD4C3A232F806700E13EEC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A6CD4C38232F806700E13EEC /* sdk_ios_objectivec_sample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A6CD4C37232F806700E13EEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6CD4C49232F806900E13EEC /* LaunchScreen.storyboard in Resources */,
+				A6CD4C46232F806900E13EEC /* Assets.xcassets in Resources */,
+				A6CD4C44232F806700E13EEC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A661160D232F8AE80095728E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/DropDown.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/LyraPaymentSDK_INTE.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Material.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Motion.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Sentry.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A6CD4C35232F806700E13EEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6CD4C41232F806700E13EEC /* ViewController.m in Sources */,
+				A60916E623310D85003198A4 /* ServerCommunication.m in Sources */,
+				A6CD4C4C232F806900E13EEC /* main.m in Sources */,
+				A6CD4C3E232F806700E13EEC /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A6CD4C42232F806700E13EEC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A6CD4C43232F806700E13EEC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A6CD4C47232F806900E13EEC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A6CD4C48232F806900E13EEC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A6CD4C4D232F806900E13EEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A6CD4C4E232F806900E13EEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A6CD4C50232F806900E13EEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YNB6GZCAPQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = sdk_ios_objectivec_sample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lyra.sdk-ios-objectivec-sample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A6CD4C51232F806900E13EEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YNB6GZCAPQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = sdk_ios_objectivec_sample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lyra.sdk-ios-objectivec-sample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A6CD4C34232F806700E13EEC /* Build configuration list for PBXProject "sdk_ios_objectivec_sample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6CD4C4D232F806900E13EEC /* Debug */,
+				A6CD4C4E232F806900E13EEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A6CD4C4F232F806900E13EEC /* Build configuration list for PBXNativeTarget "sdk_ios_objectivec_sample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6CD4C50232F806900E13EEC /* Debug */,
+				A6CD4C51232F806900E13EEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A6CD4C31232F806700E13EEC /* Project object */;
+}
