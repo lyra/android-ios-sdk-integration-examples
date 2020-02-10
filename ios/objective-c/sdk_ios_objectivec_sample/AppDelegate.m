@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-@import LyraPaymentSDK_INTE;
+@import LyraPaymentSDK;
 
 @interface AppDelegate ()
 

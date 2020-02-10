@@ -38,7 +38,9 @@ The project build setting 'Always_Embed_Swift_Standard_Libraries' is required in
 
 1. Clone the repo, `git clone REPO_URL`. 
 
-2. Open the project under Xcode.
+2. Install the dependencies using CocoaPods by the following command `pod update`.
+
+3. Open the project under Xcode with the `.xcworkspace` file.
 
 3. Edit the following fields in `AppDelegate.m`:
     - **publicKey**: replace with your public key that you can find in your back-office.

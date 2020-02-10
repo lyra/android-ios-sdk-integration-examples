@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,14 +12,24 @@
 		A64E2F512333B46D00E2578A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64E2F4F2333B46D00E2578A /* Main.storyboard */; };
 		A64E2F532333B47100E2578A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A64E2F522333B47100E2578A /* Assets.xcassets */; };
 		A64E2F562333B47100E2578A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64E2F542333B47100E2578A /* LaunchScreen.storyboard */; };
-		A64E2F652333BDA400E2578A /* Sentry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A64E2F5F2333BDA400E2578A /* Sentry.framework */; };
-		A64E2F662333BDA400E2578A /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A64E2F602333BDA400E2578A /* SnapKit.framework */; };
-		A64E2F672333BDA400E2578A /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A64E2F612333BDA400E2578A /* Material.framework */; };
-		A64E2F682333BDA400E2578A /* LyraPaymentSDK_INTE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A64E2F622333BDA400E2578A /* LyraPaymentSDK_INTE.framework */; };
-		A64E2F692333BDA400E2578A /* DropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A64E2F632333BDA400E2578A /* DropDown.framework */; };
-		A64E2F6A2333BDA400E2578A /* Motion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A64E2F642333BDA400E2578A /* Motion.framework */; };
 		A64E2F6D2333C2E600E2578A /* ServerCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E2F6C2333C2E600E2578A /* ServerCommunication.swift */; };
+		A6BC68E523ED768D00CCBCA4 /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E3B4601F645D23E959634BEA /* Pods_sdk_ios_swift_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B035F1444E7B917DB486910D /* Pods_sdk_ios_swift_sample.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A6BC68E623ED768D00CCBCA4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A6BC68E523ED768D00CCBCA4 /* BuildFile in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A64E2F482333B46D00E2578A /* sdk_ios_swift_sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sdk_ios_swift_sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,13 +39,10 @@
 		A64E2F522333B47100E2578A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A64E2F552333B47100E2578A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A64E2F572333B47100E2578A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A64E2F5F2333BDA400E2578A /* Sentry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sentry.framework; path = Carthage/Build/iOS/Sentry.framework; sourceTree = "<group>"; };
-		A64E2F602333BDA400E2578A /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
-		A64E2F612333BDA400E2578A /* Material.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Material.framework; path = Carthage/Build/iOS/Material.framework; sourceTree = "<group>"; };
-		A64E2F622333BDA400E2578A /* LyraPaymentSDK_INTE.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LyraPaymentSDK_INTE.framework; path = Carthage/Build/iOS/LyraPaymentSDK_INTE.framework; sourceTree = "<group>"; };
-		A64E2F632333BDA400E2578A /* DropDown.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropDown.framework; path = Carthage/Build/iOS/DropDown.framework; sourceTree = "<group>"; };
-		A64E2F642333BDA400E2578A /* Motion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Motion.framework; path = Carthage/Build/iOS/Motion.framework; sourceTree = "<group>"; };
 		A64E2F6C2333C2E600E2578A /* ServerCommunication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerCommunication.swift; sourceTree = "<group>"; };
+		B035F1444E7B917DB486910D /* Pods_sdk_ios_swift_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdk_ios_swift_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B61451431635D25F23960B04 /* Pods-sdk_ios_swift_sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdk_ios_swift_sample.debug.xcconfig"; path = "Target Support Files/Pods-sdk_ios_swift_sample/Pods-sdk_ios_swift_sample.debug.xcconfig"; sourceTree = "<group>"; };
+		C0AFB2C50403CB6F5EA97B49 /* Pods-sdk_ios_swift_sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdk_ios_swift_sample.release.xcconfig"; path = "Target Support Files/Pods-sdk_ios_swift_sample/Pods-sdk_ios_swift_sample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,24 +50,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A64E2F652333BDA400E2578A /* Sentry.framework in Frameworks */,
-				A64E2F662333BDA400E2578A /* SnapKit.framework in Frameworks */,
-				A64E2F672333BDA400E2578A /* Material.framework in Frameworks */,
-				A64E2F682333BDA400E2578A /* LyraPaymentSDK_INTE.framework in Frameworks */,
-				A64E2F692333BDA400E2578A /* DropDown.framework in Frameworks */,
-				A64E2F6A2333BDA400E2578A /* Motion.framework in Frameworks */,
+				E3B4601F645D23E959634BEA /* Pods_sdk_ios_swift_sample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F549DFD6B9AE1C3BC5590F7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B035F1444E7B917DB486910D /* Pods_sdk_ios_swift_sample.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A64E2F3F2333B46D00E2578A = {
 			isa = PBXGroup;
 			children = (
 				A64E2F4A2333B46D00E2578A /* sdk_ios_swift_sample */,
 				A64E2F492333B46D00E2578A /* Products */,
-				A64E2F5E2333BDA400E2578A /* Frameworks */,
+				F768911CB634DA3DAB4C61F1 /* Pods */,
+				8F549DFD6B9AE1C3BC5590F7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,17 +97,13 @@
 			path = sdk_ios_swift_sample;
 			sourceTree = "<group>";
 		};
-		A64E2F5E2333BDA400E2578A /* Frameworks */ = {
+		F768911CB634DA3DAB4C61F1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A64E2F632333BDA400E2578A /* DropDown.framework */,
-				A64E2F622333BDA400E2578A /* LyraPaymentSDK_INTE.framework */,
-				A64E2F612333BDA400E2578A /* Material.framework */,
-				A64E2F642333BDA400E2578A /* Motion.framework */,
-				A64E2F5F2333BDA400E2578A /* Sentry.framework */,
-				A64E2F602333BDA400E2578A /* SnapKit.framework */,
+				B61451431635D25F23960B04 /* Pods-sdk_ios_swift_sample.debug.xcconfig */,
+				C0AFB2C50403CB6F5EA97B49 /* Pods-sdk_ios_swift_sample.release.xcconfig */,
 			);
-			name = Frameworks;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -106,10 +113,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A64E2F5A2333B47100E2578A /* Build configuration list for PBXNativeTarget "sdk_ios_swift_sample" */;
 			buildPhases = (
+				8D692FC8E54E4612DA4F3E61 /* [CP] Check Pods Manifest.lock */,
 				A64E2F442333B46D00E2578A /* Sources */,
 				A64E2F452333B46D00E2578A /* Frameworks */,
 				A64E2F462333B46D00E2578A /* Resources */,
-				A64E2F6B2333BDDC00E2578A /* ShellScript */,
+				A6BC68E623ED768D00CCBCA4 /* Embed Frameworks */,
+				3780593CDDA82D6E594AFD32 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -167,7 +176,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A64E2F6B2333BDDC00E2578A /* ShellScript */ = {
+		3780593CDDA82D6E594AFD32 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-sdk_ios_swift_sample/Pods-sdk_ios_swift_sample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-sdk_ios_swift_sample/Pods-sdk_ios_swift_sample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-sdk_ios_swift_sample/Pods-sdk_ios_swift_sample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D692FC8E54E4612DA4F3E61 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -175,20 +201,19 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/DropDown.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/LyraPaymentSDK_INTE.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Material.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Motion.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Sentry.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-sdk_ios_swift_sample-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -343,6 +368,7 @@
 		};
 		A64E2F5B2333B47100E2578A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B61451431635D25F23960B04 /* Pods-sdk_ios_swift_sample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -365,6 +391,7 @@
 		};
 		A64E2F5C2333B47100E2578A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0AFB2C50403CB6F5EA97B49 /* Pods-sdk_ios_swift_sample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
