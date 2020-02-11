@@ -34,16 +34,20 @@ In order to be able to perform a successful payment with our Mobile SDK you must
 
 1. Clone the repo, `git clone REPO_URL`. 
 
-2. Open the project under Xcode.
+2. Install the dependencies using CocoaPods by the following command `pod update`.
 
-3. Edit the following fields in `AppDelegate.swift`:
+3. Open the project under Xcode with the `.xcworkspace` file.
+
+4. Edit the following fields in `AppDelegate.swift`:
     - **publicKey**: replace with your public key that you can find in your back-office.
     - **apiServerName**: replace with your REST API server name that you can find in your back-office.
 
 4. Edit the following field in `ServerCommunication.swift`:
     - **kMerchantServerUrl**: replace by your merchant server url.
+    
 
 5. Run it and that's all! :)
+
 
 ### How does it work
 

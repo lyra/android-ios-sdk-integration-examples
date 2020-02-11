@@ -1,3 +1,4 @@
 Carthage/
 sdk_ios_objectivec_sample.xcodeproj/project.xcworkspace
 sdk_ios_objectivec_sample.xcodeproj/xcuserdata
+Podfile.lock

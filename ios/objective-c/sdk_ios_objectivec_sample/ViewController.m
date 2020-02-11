@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-@import LyraPaymentSDK_INTE;
+@import LyraPaymentSDK;
 #import "ServerCommunication.h"
 
 @interface ViewController ()
@@ -38,7 +38,7 @@
         //After the payment context has beeen obtained
         // 3. Call the PaymentSDK process method
         NSError *error = nil;
-        [Lyra processWithContextViewController:self serverResponse: serverResponse onSuccess:^(LyraResponse *lyraResponse) {
+        [Lyra processWithContextViewController:self serverResponse: serverResponse error:&error onSuccess:^(LyraResponse *lyraResponse) {
 
             //4. Verify the payment using your server: Check the response integrity by verifying the hash on your server
             [self verifyPayment:lyraResponse];
@@ -47,7 +47,7 @@
             //TODO: Handle Payment SDK error in process payment request
             [self showMessage: [NSString stringWithFormat:@"Payment fail: %@", lyraError.errorMessage]];
             
-        } error:&error];
+        }];
     }];
 }
 

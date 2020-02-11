@@ -3,23 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		A60916E623310D85003198A4 /* ServerCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = A60916E523310D85003198A4 /* ServerCommunication.m */; };
-		A6611608232F8ABA0095728E /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6611602232F8ABA0095728E /* Material.framework */; };
-		A661160A232F8ABA0095728E /* Motion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6611604232F8ABA0095728E /* Motion.framework */; };
-		A661160B232F8ABA0095728E /* DropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6611605232F8ABA0095728E /* DropDown.framework */; };
-		A6611610232FAF560095728E /* DropDown.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6611605232F8ABA0095728E /* DropDown.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A6611611232FAF560095728E /* LyraPaymentSDK_INTE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6611606232F8ABA0095728E /* LyraPaymentSDK_INTE.framework */; };
-		A6611612232FAF560095728E /* LyraPaymentSDK_INTE.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6611606232F8ABA0095728E /* LyraPaymentSDK_INTE.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A6611614232FAF560095728E /* Material.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6611602232F8ABA0095728E /* Material.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A6611616232FAF560095728E /* Motion.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6611604232F8ABA0095728E /* Motion.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A6611617232FAF560095728E /* Sentry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6611601232F8ABA0095728E /* Sentry.framework */; };
-		A6611618232FAF560095728E /* Sentry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6611601232F8ABA0095728E /* Sentry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A6611619232FAF560095728E /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6611603232F8ABA0095728E /* SnapKit.framework */; };
-		A661161A232FAF560095728E /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A6611603232F8ABA0095728E /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A65A479823F1674E0020BE06 /* Pods_sdk_ios_objectivec_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 680A3429245794D8A32CAA58 /* Pods_sdk_ios_objectivec_sample.framework */; };
+		A65A479923F1674E0020BE06 /* Pods_sdk_ios_objectivec_sample.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 680A3429245794D8A32CAA58 /* Pods_sdk_ios_objectivec_sample.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A678C7F723F1623800F6F95F /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A6CD4C3E232F806700E13EEC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD4C3D232F806700E13EEC /* AppDelegate.m */; };
 		A6CD4C41232F806700E13EEC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD4C40232F806700E13EEC /* ViewController.m */; };
 		A6CD4C44232F806700E13EEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CD4C42232F806700E13EEC /* Main.storyboard */; };
@@ -35,12 +26,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A6611612232FAF560095728E /* LyraPaymentSDK_INTE.framework in Embed Frameworks */,
-				A6611610232FAF560095728E /* DropDown.framework in Embed Frameworks */,
-				A6611616232FAF560095728E /* Motion.framework in Embed Frameworks */,
-				A661161A232FAF560095728E /* SnapKit.framework in Embed Frameworks */,
-				A6611618232FAF560095728E /* Sentry.framework in Embed Frameworks */,
-				A6611614232FAF560095728E /* Material.framework in Embed Frameworks */,
+				A678C7F723F1623800F6F95F /* (null) in Embed Frameworks */,
+				A65A479923F1674E0020BE06 /* Pods_sdk_ios_objectivec_sample.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,14 +35,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		680A3429245794D8A32CAA58 /* Pods_sdk_ios_objectivec_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdk_ios_objectivec_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A60916E423310D85003198A4 /* ServerCommunication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerCommunication.h; sourceTree = "<group>"; };
 		A60916E523310D85003198A4 /* ServerCommunication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServerCommunication.m; sourceTree = "<group>"; };
-		A6611601232F8ABA0095728E /* Sentry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sentry.framework; path = Carthage/Build/iOS/Sentry.framework; sourceTree = "<group>"; };
-		A6611602232F8ABA0095728E /* Material.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Material.framework; path = Carthage/Build/iOS/Material.framework; sourceTree = "<group>"; };
-		A6611603232F8ABA0095728E /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
-		A6611604232F8ABA0095728E /* Motion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Motion.framework; path = Carthage/Build/iOS/Motion.framework; sourceTree = "<group>"; };
-		A6611605232F8ABA0095728E /* DropDown.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropDown.framework; path = Carthage/Build/iOS/DropDown.framework; sourceTree = "<group>"; };
-		A6611606232F8ABA0095728E /* LyraPaymentSDK_INTE.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LyraPaymentSDK_INTE.framework; path = Carthage/Build/iOS/LyraPaymentSDK_INTE.framework; sourceTree = "<group>"; };
 		A6CD4C39232F806700E13EEC /* sdk_ios_objectivec_sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sdk_ios_objectivec_sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6CD4C3C232F806700E13EEC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A6CD4C3D232F806700E13EEC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -66,6 +48,8 @@
 		A6CD4C48232F806900E13EEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A6CD4C4A232F806900E13EEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6CD4C4B232F806900E13EEC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AC9357D7F5C8A2A2CBA26FA6 /* Pods-sdk_ios_objectivec_sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdk_ios_objectivec_sample.release.xcconfig"; path = "Target Support Files/Pods-sdk_ios_objectivec_sample/Pods-sdk_ios_objectivec_sample.release.xcconfig"; sourceTree = "<group>"; };
+		D4ED6176941A1D2A2C801667 /* Pods-sdk_ios_objectivec_sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdk_ios_objectivec_sample.debug.xcconfig"; path = "Target Support Files/Pods-sdk_ios_objectivec_sample/Pods-sdk_ios_objectivec_sample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,29 +57,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6611611232FAF560095728E /* LyraPaymentSDK_INTE.framework in Frameworks */,
-				A6611617232FAF560095728E /* Sentry.framework in Frameworks */,
-				A6611619232FAF560095728E /* SnapKit.framework in Frameworks */,
-				A6611608232F8ABA0095728E /* Material.framework in Frameworks */,
-				A661160A232F8ABA0095728E /* Motion.framework in Frameworks */,
-				A661160B232F8ABA0095728E /* DropDown.framework in Frameworks */,
+				A65A479823F1674E0020BE06 /* Pods_sdk_ios_objectivec_sample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A6611600232F8ABA0095728E /* Frameworks */ = {
+		56A853770261B0299F78ADE4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A6611605232F8ABA0095728E /* DropDown.framework */,
-				A6611606232F8ABA0095728E /* LyraPaymentSDK_INTE.framework */,
-				A6611602232F8ABA0095728E /* Material.framework */,
-				A6611604232F8ABA0095728E /* Motion.framework */,
-				A6611601232F8ABA0095728E /* Sentry.framework */,
-				A6611603232F8ABA0095728E /* SnapKit.framework */,
+				D4ED6176941A1D2A2C801667 /* Pods-sdk_ios_objectivec_sample.debug.xcconfig */,
+				AC9357D7F5C8A2A2CBA26FA6 /* Pods-sdk_ios_objectivec_sample.release.xcconfig */,
 			);
-			name = Frameworks;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		A6CD4C30232F806700E13EEC = {
@@ -103,7 +78,8 @@
 			children = (
 				A6CD4C3B232F806700E13EEC /* sdk_ios_objectivec_sample */,
 				A6CD4C3A232F806700E13EEC /* Products */,
-				A6611600232F8ABA0095728E /* Frameworks */,
+				56A853770261B0299F78ADE4 /* Pods */,
+				C8C391FB5E6A8F2B03CE83C5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -133,6 +109,14 @@
 			path = sdk_ios_objectivec_sample;
 			sourceTree = "<group>";
 		};
+		C8C391FB5E6A8F2B03CE83C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				680A3429245794D8A32CAA58 /* Pods_sdk_ios_objectivec_sample.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -140,11 +124,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6CD4C4F232F806900E13EEC /* Build configuration list for PBXNativeTarget "sdk_ios_objectivec_sample" */;
 			buildPhases = (
+				BA8FA349618848C8C4A05D5C /* [CP] Check Pods Manifest.lock */,
 				A6CD4C35232F806700E13EEC /* Sources */,
 				A6CD4C36232F806700E13EEC /* Frameworks */,
 				A6CD4C37232F806700E13EEC /* Resources */,
-				A661160D232F8AE80095728E /* ShellScript */,
 				A661161B232FAF560095728E /* Embed Frameworks */,
+				4E659780F0956FA916D4D5DE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -201,7 +186,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A661160D232F8AE80095728E /* ShellScript */ = {
+		4E659780F0956FA916D4D5DE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-sdk_ios_objectivec_sample/Pods-sdk_ios_objectivec_sample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-sdk_ios_objectivec_sample/Pods-sdk_ios_objectivec_sample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-sdk_ios_objectivec_sample/Pods-sdk_ios_objectivec_sample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA8FA349618848C8C4A05D5C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -209,20 +211,19 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/DropDown.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/LyraPaymentSDK_INTE.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Material.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Motion.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Sentry.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-sdk_ios_objectivec_sample-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -374,8 +375,8 @@
 		};
 		A6CD4C50232F806900E13EEC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4ED6176941A1D2A2C801667 /* Pods-sdk_ios_objectivec_sample.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YNB6GZCAPQ;
@@ -396,8 +397,8 @@
 		};
 		A6CD4C51232F806900E13EEC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC9357D7F5C8A2A2CBA26FA6 /* Pods-sdk_ios_objectivec_sample.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YNB6GZCAPQ;

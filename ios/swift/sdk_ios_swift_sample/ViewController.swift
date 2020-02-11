@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LyraPaymentSDK_INTE
+import LyraPaymentSDK
 
 class ViewController: UIViewController {
 

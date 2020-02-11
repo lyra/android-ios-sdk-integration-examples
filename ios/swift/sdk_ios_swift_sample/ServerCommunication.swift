@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import LyraPaymentSDK_INTE
+import LyraPaymentSDK
 
 /// This class represents the communication with your merchant server to create the necessary payment context for the SDK and to verify the payment on your server.
 /// It is an example of how you can implement this communication. Check API REST integration documentation.

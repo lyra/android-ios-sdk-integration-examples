@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@import LyraPaymentSDK_INTE;
+@import LyraPaymentSDK;
 
 NS_ASSUME_NONNULL_BEGIN
 
