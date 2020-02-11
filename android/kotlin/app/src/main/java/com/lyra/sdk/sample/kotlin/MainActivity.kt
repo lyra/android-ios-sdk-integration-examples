@@ -65,9 +65,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun getOptions(): HashMap<String, Any> {
         val options = HashMap<String, Any>()
+
         options[Lyra.OPTION_API_SERVER_NAME] = API_SERVER_NAME
-        options[Lyra.OPTION_NFC_ENABLED] = false
-        options[Lyra.OPTION_CARD_SCANNING_ENABLED] = false
+
+        // android.permission.NFC must be added on AndroidManifest file
+        // options[Lyra.OPTION_NFC_ENABLED] = true
+
+        // cards-camera-recognizer dependency must be added on gradle file
+        // options[Lyra.OPTION_CARD_SCANNING_ENABLED] = true
+
         return options
     }
 

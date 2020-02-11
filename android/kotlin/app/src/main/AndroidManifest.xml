@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lyra.sdk.sample.kotlin">
 
+    <!-- to be activated if OPTION_NFC_ENABLED is activated -->
+    <!--<uses-permission android:name="android.permission.NFC" /> -->
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
