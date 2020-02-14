@@ -1,6 +1,6 @@
 # Mobile Payment SDK Integration Examples
 
-This repository contains the examples for the integration of our Mobile Payment SDK:
+This repository contains the examples for the integration of our Mobile Payment SDK. Please, find more information in the dedicated README: 
 
 ### Android Projects
 
