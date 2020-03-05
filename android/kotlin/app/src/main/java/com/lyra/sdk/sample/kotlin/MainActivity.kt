@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         private const val CUSTOMER_REFERENCE = "customerReference"
 
         //Basic auth
+        // FIXME: set your basic auth credentials
         private const val SERVER_AUTH_USER = "<REPLACE_ME>"
         private const val SERVER_AUTH_TOKEN = "<REPLACE_ME>"
         private const val CREDENTIALS: String = "$SERVER_AUTH_USER:$SERVER_AUTH_TOKEN"
