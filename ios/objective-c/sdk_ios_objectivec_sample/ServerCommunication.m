@@ -13,6 +13,10 @@
 // FIXME: change by the right merchant payment server url
 NSString *const kMerchantServerUrl = @"<REPLACE_ME>";
 
+// FIXME: change by the rigth merchant server credentials
+NSString *const username = @"<REPLACE_ME>";
+NSString *const password = @"<REPLACE_ME>";
+
 //Create Payment Context Parameters
 
 //Customer Informations
@@ -57,6 +61,10 @@ bool const askRegisterPay = false;
     if (error == nil) {
         request.HTTPBody = data;
         [request addValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+        NSString *authStr = [NSString stringWithFormat:@"%@:%@", username, password];
+        NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
+        NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodedStringWithOptions:0]];
+        [request setValue:authValue forHTTPHeaderField:@"Authorization"];
 
         NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest: request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (error != nil || data == nil) {
@@ -81,6 +89,10 @@ bool const askRegisterPay = false;
     request.HTTPMethod = @"POST";
     request.HTTPBody = [lyraResponse getResponseData];
     [request addValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    NSString *authStr = [NSString stringWithFormat:@"%@:%@", username, password];
+    NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodedStringWithOptions:0]];
+    [request setValue:authValue forHTTPHeaderField:@"Authorization"];
 
     // Call server to verify the operation
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest: request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
