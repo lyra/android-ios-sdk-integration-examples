@@ -21,7 +21,7 @@
     NSString *publicKey = @"<REPLACE_ME>";
     
     //FIXME: Change by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
-    NSString *apiServerName = @"<REPLACE_ME>";
+    NSString *apiServerName = @"<REPLACE_ME>"; // without / at the end, example https://myapiservername.com
     NSError *error = nil;
 
     //Configure SDK options
