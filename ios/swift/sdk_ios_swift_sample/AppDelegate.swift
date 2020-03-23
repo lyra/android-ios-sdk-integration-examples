@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let publicKey = "<REPLACE_ME>"
 
         //FIXME: Change by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
-        let apiServerName = "<REPLACE_ME>"
+        let apiServerName = "<REPLACE_ME>" // without / at the end, example https://myapiservername.com
 
         do {
             //Configure SDK options
