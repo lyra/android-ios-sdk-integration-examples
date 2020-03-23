@@ -38,6 +38,8 @@ In order to be able to perform a successful payment with our Mobile SDK you must
     - SERVER_URL: replace by your merchant server Url.
     - PUBLIC_KEY: replace with your public key that you can find in your back-office.
     - REST_API_SERVER_NAME: replace with your REST API server name that you can find in your back-office.
+    - SERVER_AUTH_USER: replace with your user value for basic authentication in merchant server.
+    - SERVER_AUTH_TOKEN: replace with your password value for basic authentication in merchant server.
 
 4. Run it and that's all! :)
 
