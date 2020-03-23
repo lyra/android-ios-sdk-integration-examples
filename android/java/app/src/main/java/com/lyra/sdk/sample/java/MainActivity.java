@@ -43,14 +43,14 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     // Merchant server url
     // FIXME: change by the right payment server
-    private static final String SERVER_URL = "<REPLACE_ME>";
+    private static final String SERVER_URL = "<REPLACE_ME>"; // without / at the end, example https://myserverurl.com
 
     // Public key
     // FIXME: change by your public key
     private static final String PUBLIC_KEY = "<REPLACE_ME>";
 
     // FIXME: Change by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
-    private static final String API_SERVER_NAME = "<REPLACE_ME>";
+    private static final String API_SERVER_NAME = "<REPLACE_ME>"; // without / at the end, example https://myapiservername.com
 
     // Environment TEST or PRODUCTION, refer to documentation for more information
     // FIXME: change by your targeted environment
