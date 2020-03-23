@@ -39,7 +39,7 @@ In order to be able to perform a successful payment with our Mobile SDK you must
 3. Edit the following fields in `MainActivity.kt`
     - SERVER_URL: replace by your merchant server Url.
     - PUBLIC_KEY: replace with your public key that you can find in your back-office.
-    - REST_API_SERVER_NAME: replace with your REST API server name that you can find in your back-office.
+    - API_SERVER_NAME: replace with your REST API server name that you can find in your back-office.
 
 4. Run it and that's all! :)
 
