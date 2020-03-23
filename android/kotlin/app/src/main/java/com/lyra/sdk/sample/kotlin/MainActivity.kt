@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         // FIXME: change by the right merchant payment server url
-        private const val SERVER_URL = "<REPLACE_ME>"
+        private const val SERVER_URL = "<REPLACE_ME>" // without / at the end, example https://myserverurl.com
 
         // FIXME: change by your public key
         private const val PUBLIC_KEY = "<REPLACE_ME>"
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         private const val ASK_REGISTER_PAY = false
 
         // FIXME: Change by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
-        private const val API_SERVER_NAME = "<REPLACE_ME>"
+        private const val API_SERVER_NAME = "<REPLACE_ME>" // without / at the end, example https://myapiservername.com
 
         // Payment parameters
         // FIXME: change currency for your targeted environment
