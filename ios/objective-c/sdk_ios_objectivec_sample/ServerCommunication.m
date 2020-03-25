@@ -11,7 +11,7 @@
 @implementation ServerCommunication
 
 // FIXME: change by the right merchant payment server url
-NSString *const kMerchantServerUrl = @"<REPLACE_ME>";
+NSString *const kMerchantServerUrl = @"<REPLACE_ME>"; // without / at the end, example https://myserverurl.com
 
 // FIXME: change by the rigth merchant server credentials
 NSString *const username = @"<REPLACE_ME>";

@@ -14,7 +14,7 @@ import LyraPaymentSDK
 class ServerCommunication {
     
     // FIXME: change by the right merchant payment server url
-    let kMerchantServerUrl = "<REPLACE_ME>"
+    let kMerchantServerUrl = "<REPLACE_ME>" // without / at the end, example https://myserverurl.com
     
     // FIXME: change by the rigth merchant server credentials
     let username = "<REPLACE_ME>"
