@@ -164,12 +164,7 @@ class MainActivity : AppCompatActivity() {
                  */
                 @Throws(AuthFailureError::class)
                 override fun getHeaders(): Map<String, String> {
-                    val headers =
-                        HashMap<String, String>()
-                    headers["Content-Type"] = "application/json; charset=utf-8"
-                    headers["Authorization"] =
-                        "Basic " + Base64.encodeToString(CREDENTIALS.toByteArray(), Base64.NO_WRAP)
-                    return headers
+                    return constructBasicAuthHeaders()
                 }
             }
 
@@ -230,14 +225,18 @@ class MainActivity : AppCompatActivity() {
                  */
                 @Throws(AuthFailureError::class)
                 override fun getHeaders(): Map<String, String> {
-                    val headers =
-                        HashMap<String, String>()
-                    headers["Content-Type"] = "application/json; charset=utf-8"
-                    headers["Authorization"] =
-                        "Basic " + Base64.encodeToString(CREDENTIALS.toByteArray(), Base64.NO_WRAP)
-                    return headers
+                    return constructBasicAuthHeaders()
                 }
             }
         requestQueue.add(jsonObjectRequest)
+    }
+
+    private fun constructBasicAuthHeaders(): HashMap<String, String> {
+        val headers =
+            HashMap<String, String>()
+        headers["Content-Type"] = "application/json; charset=utf-8"
+        headers["Authorization"] =
+            "Basic " + Base64.encodeToString(CREDENTIALS.toByteArray(), Base64.NO_WRAP)
+        return headers
     }
 }
