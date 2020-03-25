@@ -147,10 +147,7 @@ public class MainActivity extends AppCompatActivity {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                headers.put("Authorization", "Basic " + Base64.encodeToString(CREDENTIALS.getBytes(), Base64.NO_WRAP));
-                return headers;
+                return constructBasicAuthHeaders();
             }
         };
 
@@ -199,13 +196,17 @@ public class MainActivity extends AppCompatActivity {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                headers.put("Authorization", "Basic " + Base64.encodeToString(CREDENTIALS.getBytes(), Base64.NO_WRAP));
-                return headers;
+                return constructBasicAuthHeaders();
             }
         };
         requestQueue.add(jsonObjectRequest);
+    }
+
+    private Map<String, String> constructBasicAuthHeaders() {
+        HashMap headers = new HashMap<String, String>();
+        headers.put("Content-Type", "application/json; charset=utf-8");
+        headers.put("Authorization", "Basic " + Base64.encodeToString(CREDENTIALS.getBytes(), Base64.NO_WRAP));
+        return headers;
     }
 
     /*
