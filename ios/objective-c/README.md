@@ -48,6 +48,8 @@ The project build setting 'Always_Embed_Swift_Standard_Libraries' is required in
 
 4. Edit the following field in `ServerCommunication.m`:
     - **kMerchantServerUrl**: replace by your merchant server url.
+    - **username**: replace with your user value for basic authentication in merchant server.
+    - **password**: replace with your password value for basic authentication in merchant server.
 
 5. Run it and that's all! :)
 

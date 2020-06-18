@@ -1,10 +1,11 @@
 package com.lyra.sdk.sample.kotlin
 
 import android.os.Bundle
+import android.util.Base64
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.Request
+import com.android.volley.AuthFailureError
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         // FIXME: change by the right merchant payment server url
-        private const val SERVER_URL = "<REPLACE_ME>"
+        private const val SERVER_URL = "<REPLACE_ME>" // without / at the end, example https://myserverurl.com
 
         // FIXME: change by your public key
         private const val PUBLIC_KEY = "<REPLACE_ME>"
@@ -47,8 +48,8 @@ class MainActivity : AppCompatActivity() {
         private const val ASK_REGISTER_PAY = false
 
         // FIXME: Change by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
-        private const val API_SERVER_NAME = "<REPLACE_ME>"
-        
+        private const val API_SERVER_NAME = "<REPLACE_ME>" // without / at the end, example https://myapiservername.com
+
         // Payment parameters
         // FIXME: change currency for your targeted environment
         private const val CURRENCY = "EUR"
@@ -58,6 +59,12 @@ class MainActivity : AppCompatActivity() {
         //Customer informations
         private const val CUSTOMER_EMAIL = "customeremail@domain.com"
         private const val CUSTOMER_REFERENCE = "customerReference"
+
+        //Basic auth
+        // FIXME: set your basic auth credentials
+        private const val SERVER_AUTH_USER = "<REPLACE_ME>"
+        private const val SERVER_AUTH_TOKEN = "<REPLACE_ME>"
+        private const val CREDENTIALS: String = "$SERVER_AUTH_USER:$SERVER_AUTH_TOKEN"
     }
 
     // Initialize a new RequestQueue instance
@@ -65,9 +72,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun getOptions(): HashMap<String, Any> {
         val options = HashMap<String, Any>()
+
         options[Lyra.OPTION_API_SERVER_NAME] = API_SERVER_NAME
-        options[Lyra.OPTION_NFC_ENABLED] = false
-        options[Lyra.OPTION_CARD_SCANNING_ENABLED] = false
+
+        // android.permission.NFC must be added on AndroidManifest file
+        // options[Lyra.OPTION_NFC_ENABLED] = true
+
+        // cards-camera-recognizer dependency must be added on gradle file
+        // options[Lyra.OPTION_CARD_SCANNING_ENABLED] = true
+
         return options
     }
 
@@ -83,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         try {
             // FIXME: Change by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
             Lyra.initialize(applicationContext, PUBLIC_KEY, getOptions())
-        } catch (exception: Exception){
+        } catch (exception: Exception) {
             // handle possible exceptions when initializing SDK (Ex: invalid public key format)
         }
         requestQueue = Volley.newRequestQueue(applicationContext)
@@ -95,7 +108,7 @@ class MainActivity : AppCompatActivity() {
      *
      * @param view View of the Pay button
      */
-    fun onPayClick(view: View){
+    fun onPayClick(view: View) {
         getPaymentContext(getPaymentParams())
     }
 
@@ -128,22 +141,34 @@ class MainActivity : AppCompatActivity() {
      * @param paymentParams the operation parameters
      */
     private fun getPaymentContext(paymentParams: JSONObject) {
-        requestQueue.add(JsonObjectRequest(Request.Method.POST,
-            "${SERVER_URL}/createPayment",
-            paymentParams,
-            Response.Listener { response ->
-                //In this sample, we extract the formToken from the serverResponse, call processServerResponse() which execute the process method of the SDK
-                processServerResponse(extractFormToken(response.toString()))
-            },
-            Response.ErrorListener { error ->
-                //Please manage your error behaviour here
-                Toast.makeText(
-                    applicationContext,
-                    "Error Creating Payment",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        ))
+        val jsonObjectRequest: JsonObjectRequest =
+                object : JsonObjectRequest(
+                        Method.POST, "${SERVER_URL}/createPayment",
+                        paymentParams,
+                        Response.Listener { response ->
+                            //In this sample, we extract the formToken from the serverResponse, call processServerResponse() which execute the process method of the SDK
+                            processServerResponse(extractFormToken(response.toString()))
+                        },
+                        Response.ErrorListener { error ->
+                            //Please manage your error behaviour here
+                            Toast.makeText(
+                                    applicationContext,
+                                    "Error Creating Payment",
+                                    Toast.LENGTH_LONG
+                            ).show()
+                        }
+
+                ) {
+                    /**
+                     * Passing some request headers
+                     */
+                    @Throws(AuthFailureError::class)
+                    override fun getHeaders(): Map<String, String> {
+                        return constructBasicAuthHeaders()
+                    }
+                }
+
+        requestQueue.add(jsonObjectRequest)
     }
 
     /**
@@ -200,25 +225,44 @@ class MainActivity : AppCompatActivity() {
      * @param payload information about the result of the operation
      */
     fun verifyPayment(payload: LyraResponse) {
-        requestQueue.add(JsonObjectRequest(Request.Method.POST,
-            "${SERVER_URL}/verifyResult",
-            payload,
-            Response.Listener { response ->
-                //Check the response integrity by verifying the hash on your server
-                Toast.makeText(
-                    applicationContext,
-                    "Payment success",
-                    Toast.LENGTH_LONG
-                ).show()
-            },
-            Response.ErrorListener { error ->
-                //Manage error here, please refer to the documentation for more information
-                Toast.makeText(
-                    applicationContext,
-                    "Payment verification fail",
-                    Toast.LENGTH_LONG
-                ).show()
+        val jsonObjectRequest: JsonObjectRequest =
+            object : JsonObjectRequest(
+                Method.POST, "${SERVER_URL}/verifyResult",
+                payload,
+                Response.Listener { response ->
+                    //Check the response integrity by verifying the hash on your server
+                    Toast.makeText(
+                        applicationContext,
+                        "Payment success",
+                        Toast.LENGTH_LONG
+                    ).show()
+                },
+                Response.ErrorListener { error ->
+                    //Manage error here, please refer to the documentation for more information
+                    Toast.makeText(
+                        applicationContext,
+                        "Payment verification fail",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            ) {
+                /**
+                 * Passing some request headers
+                 */
+                @Throws(AuthFailureError::class)
+                override fun getHeaders(): Map<String, String> {
+                    return constructBasicAuthHeaders()
+                }
             }
-        ))
+        requestQueue.add(jsonObjectRequest)
+    }
+
+    private fun constructBasicAuthHeaders(): HashMap<String, String> {
+        val headers =
+            HashMap<String, String>()
+        headers["Content-Type"] = "application/json; charset=utf-8"
+        headers["Authorization"] =
+            "Basic " + Base64.encodeToString(CREDENTIALS.toByteArray(), Base64.NO_WRAP)
+        return headers
     }
 }

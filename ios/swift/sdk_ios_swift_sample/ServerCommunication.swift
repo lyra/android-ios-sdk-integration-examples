@@ -12,34 +12,39 @@ import LyraPaymentSDK
 /// This class represents the communication with your merchant server to create the necessary payment context for the SDK and to verify the payment on your server.
 /// It is an example of how you can implement this communication. Check API REST integration documentation.
 class ServerCommunication {
-
+    
     // FIXME: change by the right merchant payment server url
-    let kMerchantServerUrl = "<REPLACE_ME>"
-
+    let kMerchantServerUrl = "<REPLACE_ME>" // without / at the end, example https://myserverurl.com
+    
+    // FIXME: change by the rigth merchant server credentials
+    let username = "<REPLACE_ME>"
+    let password = "<REPLACE_ME>"
+    
+    
     //Create Payment Context Parameters
     // Change by the desired parameters if necessary
-
+    
     //Customer Informations
     var email = "customeremail@domain.com"
     var customerReference = "customerRef"
-
+    
     var amount = 100
     var currency = "EUR"
     var orderId = ""
-
+    
     // Environment TEST or PRODUCTION, refer to documentation for more information
     // FIXME: change by your targeted environment
     var paymentMode = "TEST"
-
+    
     // TRUE to display a "register the card" switch in the payment form
     var askRegisterPay = false
-
-
+    
+    
     /// This method send to your merchant server the information necessary for create the request to execute the payment using the Payment SDK.
     ///
     /// - Parameter onGetContextCompletion: The completion block to be executed after the getProcessPaymentContext has finished.
     func getPaymentContext(onGetContextCompletion: @escaping (_ getContextSuccess: Bool, _ serverAnswer: String?) -> Void) {
-
+        
         //create request
         guard let serverUrl = NSURL(string: "\(kMerchantServerUrl)/createPayment") else {
             onGetContextCompletion(false, nil)
@@ -55,7 +60,13 @@ class ServerCommunication {
         do {
             let jsonParams = try JSONSerialization.data(withJSONObject: paramsDict, options: [])
             request.httpBody = jsonParams
+            
+            let loginString = String(format: "%@:%@", username, password)
+            let loginData = loginString.data(using: String.Encoding.utf8)!
+            let base64LoginString = loginData.base64EncodedString()
+            
             request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
             
         } catch {
             onGetContextCompletion(false, nil)
@@ -63,20 +74,20 @@ class ServerCommunication {
         }
         // Call server to obtain a create payment response
         let task = URLSession.shared.dataTask(with: request) { (data: Data?, _: URLResponse?, error: Error?) in
-                if error != nil || data == nil {
-                   onGetContextCompletion(false, nil)
-                }
-                if let json = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers),
-                    let jsonData = try? JSONSerialization.data(withJSONObject: json),
-                    let serverAnswer = String(data: jsonData, encoding: .utf8) {
-                     onGetContextCompletion(true, serverAnswer)
-                } else {
-                     onGetContextCompletion(false, nil)
-                }
+            if error != nil || data == nil {
+                onGetContextCompletion(false, nil)
             }
-            task.resume()
+            if let json = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers),
+                let jsonData = try? JSONSerialization.data(withJSONObject: json),
+                let serverAnswer = String(data: jsonData, encoding: .utf8) {
+                onGetContextCompletion(true, serverAnswer)
+            } else {
+                onGetContextCompletion(false, nil)
+            }
+        }
+        task.resume()
     }
-
+    
     ///  This method send to your merchant server the information necessary for validate the payment.
     ///
     /// - Parameters:
@@ -91,20 +102,26 @@ class ServerCommunication {
         var request = URLRequest(url: serverUrl as URL)
         request.httpMethod = "POST"
         request.httpBody = lyraResponse.getResponseData()
+        
+        let loginString = String(format: "%@:%@", username, password)
+        let loginData = loginString.data(using: String.Encoding.utf8)!
+        let base64LoginString = loginData.base64EncodedString()
+        
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-
+        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        
         // Call server to verify the operation
         let task = URLSession.shared.dataTask(with: request) { (data: Data?, _ response: URLResponse?, error: Error?) in
-                if error != nil {
-                    onVerifyPaymentCompletion(false, true)
-                } else if let httpResponse = response as? HTTPURLResponse {
-                    if httpResponse.statusCode == 200 {
-                        onVerifyPaymentCompletion(true, false)
-                    } else {
-                        onVerifyPaymentCompletion(false, false)
-                    }
+            if error != nil {
+                onVerifyPaymentCompletion(false, true)
+            } else if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    onVerifyPaymentCompletion(true, false)
+                } else {
+                    onVerifyPaymentCompletion(false, false)
                 }
             }
-            task.resume()
+        }
+        task.resume()
     }
 }

@@ -37,6 +37,6 @@ dependencies {
 
     implementation 'com.lyra:sdk:1.0.+'
 
-    //To be activated if scan card option is set to true
+    // to be activated if OPTION_CARD_SCANNING_ENABLED is activated
     //implementation 'com.lyra:cards-camera-recognizer:1.0.+'
 }

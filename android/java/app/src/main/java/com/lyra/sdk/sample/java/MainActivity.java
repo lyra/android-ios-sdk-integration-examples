@@ -2,9 +2,11 @@ package com.lyra.sdk.sample.java;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Main activity
@@ -40,14 +43,14 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
     // Merchant server url
     // FIXME: change by the right payment server
-    private static final String SERVER_URL = "<REPLACE_ME>";
+    private static final String SERVER_URL = "<REPLACE_ME>"; // without / at the end, example https://myserverurl.com
 
     // Public key
     // FIXME: change by your public key
     private static final String PUBLIC_KEY = "<REPLACE_ME>";
 
     // FIXME: Change by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
-    private static final String API_SERVER_NAME = "<REPLACE_ME>";
+    private static final String API_SERVER_NAME = "<REPLACE_ME>"; // without / at the end, example https://myapiservername.com
 
     // Environment TEST or PRODUCTION, refer to documentation for more information
     // FIXME: change by your targeted environment
@@ -55,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
     // FIXME: activate if we want to ask to register the card
     private static final boolean ASK_REGISTER_PAY = false;
+
+    //Basic auth
+    // FIXME: set your basic auth credentials
+    private static final String SERVER_AUTH_USER = "<REPLACE_ME>";
+    private static final String SERVER_AUTH_TOKEN = "<REPLACE_ME>";
+    private static final String CREDENTIALS = SERVER_AUTH_USER + ":" + SERVER_AUTH_TOKEN;
 
     // Payment parameters
     // Change by the desired parameters if necessary
@@ -109,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onPayClick(View view) {
         try {
-            getPaymentContext(getPaymentParams());
+            getPaymentContext();
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), "Unexpected Error", Toast.LENGTH_LONG).show();
         }
@@ -118,11 +127,10 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Performs the create operation, calling the merchant server.
      * This call creates the session on server and retrieves the payment context that is necessary to continue the process
-     *
-     * @param paymentParams the operation parameters
      */
-    private void getPaymentContext(JSONObject paymentParams) {
-        requestQueue.add(new JsonObjectRequest(Request.Method.POST, SERVER_URL + "/createPayment", getPaymentParams(), new Response.Listener<JSONObject>() {
+    private void getPaymentContext() {
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, SERVER_URL + "/createPayment", getPaymentParams(), new Response.Listener<JSONObject>() {
             //Process merchant server response
             @Override
             public void onResponse(JSONObject response) {
@@ -134,9 +142,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //Please manage your error behaviour here
-                Toast.makeText(getApplicationContext(), "Error Creating Payment", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Error Creating Payment" + error.getMessage(), Toast.LENGTH_LONG).show();
             }
-        }));
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return constructBasicAuthHeaders();
+            }
+        };
+
+        requestQueue.add(jsonObjectRequest);
     }
 
     /**
@@ -191,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
      * @param response information about the result of the operation
      */
     private void verifyPayment(JSONObject response) {
-        requestQueue.add(new JsonObjectRequest(Request.Method.POST, SERVER_URL + "/verifyResult", response, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, SERVER_URL + "/verifyResult", response, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 //Check the response integrity by verifying the hash on your server
@@ -204,7 +219,20 @@ public class MainActivity extends AppCompatActivity {
                 //Manage error here, please refer to the documentation for more information
                 Toast.makeText(getApplicationContext(), "Payment verification fail", Toast.LENGTH_LONG).show();
             }
-        }));
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return constructBasicAuthHeaders();
+            }
+        };
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private Map<String, String> constructBasicAuthHeaders() {
+        HashMap headers = new HashMap<String, String>();
+        headers.put("Content-Type", "application/json; charset=utf-8");
+        headers.put("Authorization", "Basic " + Base64.encodeToString(CREDENTIALS.getBytes(), Base64.NO_WRAP));
+        return headers;
     }
 
     /*

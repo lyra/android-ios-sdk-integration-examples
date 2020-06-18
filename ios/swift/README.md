@@ -44,6 +44,8 @@ In order to be able to perform a successful payment with our Mobile SDK you must
 
 4. Edit the following field in `ServerCommunication.swift`:
     - **kMerchantServerUrl**: replace by your merchant server url.
+    - **username**: replace with your user value for basic authentication in merchant server.
+    - **password**: replace with your password value for basic authentication in merchant server.
     
 
 5. Run it and that's all! :)
