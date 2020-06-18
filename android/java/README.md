@@ -74,8 +74,8 @@ requestQueue.add(new JsonObjectRequest(Request.Method.POST, SERVER_URL + "/creat
     //Process merchant server response
     @Override
     public void onResponse(JSONObject response) {
-        //In this sample, the processPayment checks the response and will call the process method of the SDK if the response is good.
-        processPayment(response);
+        //In this sample, we call processServerResponse() which execute the process method of the SDK with the formToken extracted from the serverResponse
+        processServerResponse(response.toString());
     }
 }, new Response.ErrorListener() {
     //Error when calling merchant server
@@ -89,10 +89,10 @@ requestQueue.add(new JsonObjectRequest(Request.Method.POST, SERVER_URL + "/creat
 
 In this sample, in case of error calling the server, a toast will be displayed with the error text.
   
-Otherwise, the `processPayment` method is called with the server response. The server response is checked and the `process` SDK method is called.
+Otherwise, the `processServerResponse` method is called with the server response. The formToken is extracted from the server response and the `process` SDK method is called.
 
 ```java
-Lyra.INSTANCE.process(getSupportFragmentManager(), createResponse.toString(), new LyraHandler() {
+Lyra.INSTANCE.process(getSupportFragmentManager(), formToken, new LyraHandler() {
     @Override
     public void onSuccess(LyraResponse lyraResponse) {
         //Check the response integrity by verifying the hash on your server

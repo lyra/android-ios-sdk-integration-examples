@@ -126,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
             //Process merchant server response
             @Override
             public void onResponse(JSONObject response) {
-                //In this sample, the processPayment checks the response and will call the process method of the SDK if the response is good.
-                processPayment(response);
+                //In this sample, we extract the formToken from the serverResponse, call processServerResponse() which execute the process method of the SDK
+                processServerResponse(extractFormToken(response.toString()));
             }
         }, new Response.ErrorListener() {
             //Error when calling merchant server
@@ -140,13 +140,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Return a formToken if extraction is done correctly
+     * Return an empty formToken if an error occur -> SDK will return an INVALID_FORMTOKEN exception
+     */
+    private String extractFormToken(String serverResponse) {
+        try {
+            JSONObject answer = new JSONObject(serverResponse).getJSONObject("answer");
+            String formToken = answer.optString("formToken");
+            if (formToken.equals("")) {
+                // TODO Please manage your error behaviour here
+                // in this case, an error is present in the serverResponse, check the returned errorCode errorMessage
+                Toast.makeText(getApplicationContext(), "extractFormToken() -> formToken is empty" + "\n" +
+                        "errorCode = " + answer.getString("errorCode") + "\n" +
+                        "errorMessage = " + answer.optString("errorMessage") + "\n" +
+                        "detailedErrorCode = " + answer.optString("detailedErrorCode") + "\n" +
+                        "detailedErrorMessage = " + answer.optString("detailedErrorMessage"), Toast.LENGTH_LONG).show();
+            }
+            return formToken;
+        } catch (Throwable throwable) {
+            // TODO Please manage your error behaviour here
+            // in this case, the serverResponse isn't as expected, please check the input serverResponse param
+            Toast.makeText(getApplicationContext(), "Cannot extract formToken from serverResponse", Toast.LENGTH_LONG).show();
+            return "";
+        }
+    }
+
+    /**
      * Calls the Lyra Mobile SDK in order to handle the payment operation
      *
-     * @param createResponse the information of the payment session
+     * @param formToken the formToken extracted from the information of the payment session
      */
-    private void processPayment(JSONObject createResponse) {
+    private void processServerResponse(String formToken) {
         //Call Lyra Mobile SDK
-        SDK.process(getSupportFragmentManager(), createResponse.toString(), new LyraHandler() {
+        SDK.process(getSupportFragmentManager(), formToken, new LyraHandler() {
             @Override
             public void onSuccess(LyraResponse lyraResponse) {
                 verifyPayment(lyraResponse);

@@ -132,8 +132,8 @@ class MainActivity : AppCompatActivity() {
             "${SERVER_URL}/createPayment",
             paymentParams,
             Response.Listener { response ->
-                //In this sample, the processPayment checks the response and will call the process method of the SDK if the response is good.
-                processPayment(response.toString())
+                //In this sample, we extract the formToken from the serverResponse, call processServerResponse() which execute the process method of the SDK
+                processServerResponse(extractFormToken(response.toString()))
             },
             Response.ErrorListener { error ->
                 //Please manage your error behaviour here
@@ -147,13 +147,39 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
+     * Return a formToken if extraction is done correctly
+     * Return an empty formToken if an error occur -> SDK will return an INVALID_FORMTOKEN exception
+     */
+    private fun extractFormToken(serverResponse: String): String {
+        try {
+            val answer = JSONObject(serverResponse).getJSONObject("answer")
+            val formToken = answer.optString("formToken")
+            if (formToken.isBlank()) {
+                // TODO Please manage your error behaviour here
+                // in this case, an error is present in the serverResponse, check the returned errorCode errorMessage
+                Toast.makeText(applicationContext, "extractFormToken() -> formToken is empty" + "\n" +
+                        "errorCode = " + answer.getString("errorCode")!! + "\n" +
+                        "errorMessage = " + answer.optString("errorMessage") + "\n" +
+                        "detailedErrorCode = " + answer.optString("detailedErrorCode") + "\n" +
+                        "detailedErrorMessage = " + answer.optString("detailedErrorMessage"), Toast.LENGTH_LONG).show()
+            }
+            return formToken
+        } catch (throwable: Throwable) {
+            // TODO Please manage your error behaviour here
+            // in this case, the serverResponse isn't as expected, please check the input serverResponse param
+            Toast.makeText(applicationContext, "Cannot extract formToken from serverResponse", Toast.LENGTH_LONG).show()
+            return ""
+        }
+    }
+
+    /**
      * Calls the Lyra Mobile SDK in order to handle the payment operation
      *
-     * @param createResponse the information of the payment session
+     * @param formToken the formToken extracted from the information of the payment session
      */
-    private fun processPayment(createResponse: String?) {
+    private fun processServerResponse(formToken: String) {
         // Open the payment form
-        Lyra.process(supportFragmentManager, createResponse!!, object : LyraHandler {
+        Lyra.process(supportFragmentManager, formToken, object : LyraHandler {
             override fun onSuccess(lyraResponse: LyraResponse) {
                 verifyPayment(lyraResponse)
             }
