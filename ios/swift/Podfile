@@ -4,7 +4,7 @@ target 'sdk_ios_swift_sample' do
 
   use_frameworks!
 
-  pod 'LyraPaymentSDK'
+  pod 'LyraPaymentSDK', '~> 1.1.0'
   pod 'LyraCardsRecognizer'
 
 end

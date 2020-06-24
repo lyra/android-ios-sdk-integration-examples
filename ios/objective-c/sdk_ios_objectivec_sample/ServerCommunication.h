@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^onGetPaymentContextCompletion)(BOOL getContextSuccess, NSString* _Nullable serverAnswer);  
+typedef void(^onGetPaymentContextCompletion)(BOOL getContextSuccess, NSString* _Nullable formToken, NSError* _Nullable error);  
 typedef void(^onVerifyPaymentCompletion)(BOOL paymentVerified, BOOL isErrorConnection);
 
 /**

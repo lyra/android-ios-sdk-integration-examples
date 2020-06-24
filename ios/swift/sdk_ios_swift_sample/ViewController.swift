@@ -21,17 +21,18 @@ class ViewController: UIViewController {
 
     @IBAction func executeSdkPayment(_ sender: Any) {
 
-        // 2. Execute getProcessPaymentContext for get serverResponse (required param in SDK process method)
-        serverCommunication.getPaymentContext { (getContextSuccess, serverResponse) in
-            if !getContextSuccess || serverResponse == nil {
+        // 2. Execute getProcessPaymentContext for get formToken (required param in SDK process method)
+        serverCommunication.getPaymentContext { (getContextSuccess, formToken, error) in
+            if !getContextSuccess || formToken == nil {
                 //TODO: Handle error in getProcessPaymentContext
-                self.showMessage("Error getting payment context")
+                let message = error != nil ? error.userInfo[NSLocalizedFailureReasonErrorKey] as? String : "Error getting payment context"
+                self.showMessage(message)
                 return
             }
             // After the payment context has been obtained
             do {
                 // 3. Call the PaymentSDK process method
-                try Lyra.process(contextViewController: self, serverResponse: serverResponse!,
+                try Lyra.process(self, formToken!,
                                  onSuccess: { ( _ lyraResponse: LyraResponse) -> Void in
 
                                     //4. Verify the payment using your server: Check the response integrity by verifying the hash on your server
