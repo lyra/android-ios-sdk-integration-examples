@@ -28,7 +28,7 @@
     // 1. Init server comunication class for get createPayment context
     _serverComunication = [[ServerCommunication alloc] init];
 
-    // 2. Execute getProcessPaymentContext for get the formToken (required param in SDK process method)
+    // 2. Execute getPaymentContext for get the formToken (required param in SDK process method)
     [_serverComunication getProcessPaymentContext:^(BOOL getContextSuccess, NSString *formToken, NSError* error) {
         if (!getContextSuccess || formToken == nil) {
             //TODO: Handle error in getProcessPaymentContext
