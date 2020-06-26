@@ -81,7 +81,9 @@ requestQueue.add(JsonObjectRequest(Request.Method.POST,
             paymentParams,
             Response.Listener { response ->
                 //In this sample, we call processServerResponse() which execute the process method of the SDK with the formToken extracted from the serverResponse
-                processServerResponse(response.toString())
+		val answer = JSONObject(response).getJSONObject("answer")
+                val formToken = answer.getString("formToken")
+                processServerResponse(formToken)
             },
             Response.ErrorListener { error ->
                 //Please manage your application error behavior here
@@ -96,7 +98,7 @@ requestQueue.add(JsonObjectRequest(Request.Method.POST,
 
 In this sample, in case of error calling the server, a toast will be displayed with the error text.
   
-Otherwise, the `processServerResponse` method is called with the server response. The formToken is extracted from the server response and the `process` SDK method is called.
+Otherwise, the `processServerResponse` method is called with the formToken.
 
 ```kotlin
 Lyra.process(supportFragmentManager, formToken, object : LyraHandler {
