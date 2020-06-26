@@ -78,7 +78,7 @@ requestQueue.add(new JsonObjectRequest(Request.Method.POST, SERVER_URL + "/creat
     public void onResponse(JSONObject response) {
         //In this sample, we call processServerResponse() which execute the process method of the SDK with the formToken extracted from the serverResponse
         JSONObject answer = new JSONObject(response).getJSONObject("answer");
-        String formToken = answer.optString("formToken");
+        String formToken = answer.getString("formToken");
 	processServerResponse(formToken);
     }
 }, new Response.ErrorListener() {
