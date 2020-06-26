@@ -77,7 +77,9 @@ requestQueue.add(new JsonObjectRequest(Request.Method.POST, SERVER_URL + "/creat
     @Override
     public void onResponse(JSONObject response) {
         //In this sample, we call processServerResponse() which execute the process method of the SDK with the formToken extracted from the serverResponse
-        processServerResponse(response.toString());
+        JSONObject answer = new JSONObject(response).getJSONObject("answer");
+        String formToken = answer.optString("formToken");
+	processServerResponse(formToken);
     }
 }, new Response.ErrorListener() {
     //Error when calling merchant server
@@ -91,7 +93,7 @@ requestQueue.add(new JsonObjectRequest(Request.Method.POST, SERVER_URL + "/creat
 
 In this sample, in case of error calling the server, a toast will be displayed with the error text.
   
-Otherwise, the `processServerResponse` method is called with the server response. The formToken is extracted from the server response and the `process` SDK method is called.
+Otherwise, the `processServerResponse` method is executed with the formToken and the `process` SDK method is called.
 
 ```java
 Lyra.INSTANCE.process(getSupportFragmentManager(), formToken, new LyraHandler() {
