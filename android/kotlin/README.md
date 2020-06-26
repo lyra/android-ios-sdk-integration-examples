@@ -98,7 +98,7 @@ requestQueue.add(JsonObjectRequest(Request.Method.POST,
 
 In this sample, in case of error calling the server, a toast will be displayed with the error text.
   
-Otherwise, the `processServerResponse` method is called with the formToken.
+Otherwise, the `processServerResponse` method is executed with the formToken and the `process` SDK method is called.
 
 ```kotlin
 Lyra.process(supportFragmentManager, formToken, object : LyraHandler {
