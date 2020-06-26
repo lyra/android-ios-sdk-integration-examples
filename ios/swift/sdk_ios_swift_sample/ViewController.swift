@@ -21,7 +21,7 @@ class ViewController: UIViewController {
 
     @IBAction func executeSdkPayment(_ sender: Any) {
 
-        // 2. Execute getProcessPaymentContext for get formToken (required param in SDK process method)
+        // 2. Execute getPaymentContext for get formToken (required param in SDK process method)
         serverCommunication.getPaymentContext { (getContextSuccess, formToken, error) in
             if !getContextSuccess || formToken == nil {
                 //TODO: Handle error in getProcessPaymentContext

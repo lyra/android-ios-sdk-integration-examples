@@ -86,8 +86,11 @@ ServerCommunication *serverComunication = [[ServerCommunication alloc] init];
 
 // 2. Execute getProcessPaymentContext for get the formToken (required param in SDK process method)
 [_serverComunication getProcessPaymentContext:^(BOOL getContextSuccess, NSString *formToken, NSError* error) {
+...
+NSDictionary *serverResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+NSString* formToken = (NSString*)[serverResponse objectForKey:@"formToken"];
      
-    }];
+ }];
 ```
 
 In this sample, in case of error calling the server, a message will be displayed with the error text.

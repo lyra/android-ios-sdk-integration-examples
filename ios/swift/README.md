@@ -81,9 +81,13 @@ In this sample, this is done by the `getPaymentContext` method in ServerCommunic
 // 1. Init server comunication class for get createPayment context
 let serverCommunication = ServerCommunication()
 
-// 2. Execute getProcessPaymentContext for get the formToken (required param in SDK process method)
+// 2. Execute getPaymentContext for get the formToken (required param in SDK process method)
 serverCommunication.getPaymentContext { (getContextSuccess, formToken, error) in
-          
+...
+let objectResponse = json as? [String: Any]
+let serverResponse = objectResponse["answer"] as? [String: Any]
+let formToken = serverReponse["formToken"] as? String 
+
 }
 ```
 
