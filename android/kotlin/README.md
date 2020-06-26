@@ -81,7 +81,7 @@ requestQueue.add(JsonObjectRequest(Request.Method.POST,
             paymentParams,
             Response.Listener { response ->
                 //In this sample, we call processServerResponse() which execute the process method of the SDK with the formToken extracted from the serverResponse
-		val answer = JSONObject(response).getJSONObject("answer")
+		 val answer = JSONObject(response).getJSONObject("answer")
                 val formToken = answer.getString("formToken")
                 processServerResponse(formToken)
             },
