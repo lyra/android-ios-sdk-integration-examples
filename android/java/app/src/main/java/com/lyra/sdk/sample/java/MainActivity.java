@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 //In this sample, we extract the formToken from the serverResponse, call processServerResponse() which execute the process method of the SDK
-                processServerResponse(extractFormToken(response.toString()));
+                processFormToken(extractFormToken(response.toString()));
             }
         }, new Response.ErrorListener() {
             //Error when calling merchant server
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param formToken the formToken extracted from the information of the payment session
      */
-    private void processServerResponse(String formToken) {
+    private void processFormToken(String formToken) {
         //Call Lyra Mobile SDK
         SDK.process(getSupportFragmentManager(), formToken, new LyraHandler() {
             @Override

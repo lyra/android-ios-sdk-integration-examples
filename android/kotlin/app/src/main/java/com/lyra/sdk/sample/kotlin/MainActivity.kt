@@ -147,7 +147,7 @@ class MainActivity : AppCompatActivity() {
                         paymentParams,
                         Response.Listener { response ->
                             //In this sample, we extract the formToken from the serverResponse, call processServerResponse() which execute the process method of the SDK
-                            processServerResponse(extractFormToken(response.toString()))
+                            processFormToken(extractFormToken(response.toString()))
                         },
                         Response.ErrorListener { error ->
                             //Please manage your error behaviour here
@@ -202,7 +202,7 @@ class MainActivity : AppCompatActivity() {
      *
      * @param formToken the formToken extracted from the information of the payment session
      */
-    private fun processServerResponse(formToken: String) {
+    private fun processFormToken(formToken: String) {
         // Open the payment form
         Lyra.process(supportFragmentManager, formToken, object : LyraHandler {
             override fun onSuccess(lyraResponse: LyraResponse) {
