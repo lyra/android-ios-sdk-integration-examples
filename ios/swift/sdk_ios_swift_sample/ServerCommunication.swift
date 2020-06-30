@@ -75,7 +75,7 @@ class ServerCommunication {
         // Call server to obtain a formToken
         let task = URLSession.shared.dataTask(with: request) { (data: Data?, _: URLResponse?, error: Error?) in
             if error != nil || data == nil {
-                onGetContextCompletion(false, nil, error)
+                onGetContextCompletion(false, nil, error! as NSError)
             }
             if let json = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers),
                 let objectResponse = json as? [String: Any],
@@ -83,7 +83,7 @@ class ServerCommunication {
                 ServerCommunication.extractFormToken(serverResponse, completion: onGetContextCompletion)
             } else {
                 //Handle error in request for obtain a formToken
-                onGetContextCompletion(false, nil)
+                onGetContextCompletion(false, nil, nil)
             }
         }
         task.resume()
@@ -126,23 +126,21 @@ class ServerCommunication {
         task.resume()
     }
 
-
     /// This method extract formToken from the given serverResponse.
     /// - Parameters:
     ///   - serverResponse: String that correspond with the ServerResponse.
     ///   - completion: The completion block to be execute after the formToken is getted.
     private static func extractFormToken( _ serverResponse: [String: Any], completion: @escaping (Bool, String, NSError?) -> Void) {
-        if let formToken = serverReponse["formToken"] as? String {
+        if let formToken = serverResponse["formToken"] as? String {
             completion(true, formToken, nil)
-        } else if let errorCode = serverReponse["errorCode"] as? String {
-            let errorMsg = serverReponse["errorMessage"] as? String
-            let detailErrorCode = serverReponse["detailedErrorCode"] as? String
-            let detailErrorMsg = serverReponse["detailedErrorMessage"] as? String
+        } else if let errorCode = serverResponse["errorCode"] as? String {
+            let errorMsg = serverResponse["errorMessage"] as? String
+            let detailErrorCode = serverResponse["detailedErrorCode"] as? String
+            let detailErrorMsg = serverResponse["detailedErrorMessage"] as? String
             let message = "Error Code: \(errorCode)" + "\n" + "Error Message: \(errorMsg ?? "")" + "\n" + "Error Detail Code: \(detailErrorCode ?? "")" + "\n" + "Error Detail Message: \(detailErrorMsg ?? "")"
             completion(false, "", NSError(domain: "com.lyra.server.communication", code: 1, userInfo: [NSLocalizedFailureReasonErrorKey: message]))
         } else {
             completion(false, "", NSError(domain: "com.lyra.server.communication", code: 2, userInfo: [NSLocalizedFailureReasonErrorKey: "Invalid formToken"]))
         }
     }
-
 }

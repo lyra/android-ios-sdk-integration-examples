@@ -86,7 +86,7 @@ serverCommunication.getPaymentContext { (getContextSuccess, formToken, error) in
 ...
 let objectResponse = json as? [String: Any]
 let serverResponse = objectResponse["answer"] as? [String: Any]
-let formToken = serverReponse["formToken"] as? String 
+let formToken = serverResponse["formToken"] as? String 
 
 }
 ```

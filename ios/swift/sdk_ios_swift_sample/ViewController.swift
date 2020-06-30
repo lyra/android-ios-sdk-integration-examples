@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         serverCommunication.getPaymentContext { (getContextSuccess, formToken, error) in
             if !getContextSuccess || formToken == nil {
                 //TODO: Handle error in getProcessPaymentContext
-                let message = error != nil ? error.userInfo[NSLocalizedFailureReasonErrorKey] as? String : "Error getting payment context"
+                let message = error != nil ? error!.userInfo[NSLocalizedFailureReasonErrorKey] as? String : "Error getting payment context"
                 self.showMessage(message)
                 return
             }
