@@ -84,20 +84,24 @@ In this sample, this is done by the `getPaymentContext` method in ServerCommunic
 // 1. Init server comunication class for get createPayment context
 ServerCommunication *serverComunication = [[ServerCommunication alloc] init];
 
-// 2. Execute getProcessPaymentContext for get serverResponse (required param in SDK process method)
-[serverComunication getProcessPaymentContext:^(BOOL getContextSuccess, NSString *serverResponse) {
+// 2. Execute getPaymentContext for get the formToken (required param in SDK process method)
+[_serverComunication getProcessPaymentContext:^(BOOL getContextSuccess, NSString *formToken, NSError* error) {
+...
+NSDictionary *objectResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+NSDictionary *serverResponse = [objectResponse objectForKey:@"answer"];
+NSString* formToken = (NSString*)[serverResponse objectForKey:@"formToken"];
      
-    }];
+ }];
 ```
 
 In this sample, in case of error calling the server, a message will be displayed with the error text.
   
-Otherwise, the `process` method is called with the server response. The server response is checked and the `process` SDK method is called.
+Otherwise, the `process` method is called with the formToken. The formToken is checked and the `process` SDK method is called.
 
 ```objectivec
-[Lyra processWithContextViewController:self serverResponse: serverResponse onSuccess:^(LyraResponse *lyraResponse) {
+  [Lyra process:self :formToken error:&errorInProcess onSuccess:^(LyraResponse *lyraResponse) {
 
-	//Verify the payment using your server: Check the response integrity by 	verifying the hash on your server
+	//Verify the payment using your server: Check the response integrity by verifying the hash on your server
 	[self verifyPayment:lyraResponse];
             
 	} onError:^(LyraError *lyraError, LyraResponse *lyraResponse) {

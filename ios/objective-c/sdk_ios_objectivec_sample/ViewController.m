@@ -12,7 +12,7 @@
 
 @interface ViewController ()
 
-@property(nonatomic, strong)   ServerCommunication *serverComunication;
+@property(nonatomic, strong) ServerCommunication *serverComunication;
 
 @end
 
@@ -28,17 +28,18 @@
     // 1. Init server comunication class for get createPayment context
     _serverComunication = [[ServerCommunication alloc] init];
 
-    // 2. Execute getProcessPaymentContext for get serverResponse (required param in SDK process method)
-    [_serverComunication getProcessPaymentContext:^(BOOL getContextSuccess, NSString *serverResponse) {
-        if (!getContextSuccess || serverResponse == nil) {
+    // 2. Execute getPaymentContext for get the formToken (required param in SDK process method)
+    [_serverComunication getProcessPaymentContext:^(BOOL getContextSuccess, NSString *formToken, NSError* error) {
+        if (!getContextSuccess || formToken == nil) {
             //TODO: Handle error in getProcessPaymentContext
-            [self showMessage: @"Error getting payment context"];
+            NSString *errorMessage = error != nil ? [[error userInfo] objectForKey:NSLocalizedFailureReasonErrorKey] : @"Error getting payment context";
+            [self showMessage: errorMessage];
             return;
         }
         //After the payment context has beeen obtained
         // 3. Call the PaymentSDK process method
-        NSError *error = nil;
-        [Lyra processWithContextViewController:self serverResponse: serverResponse error:&error onSuccess:^(LyraResponse *lyraResponse) {
+        NSError *errorInProcess = nil;
+        [Lyra process:self :formToken error:&errorInProcess onSuccess:^(LyraResponse *lyraResponse) {
 
             //4. Verify the payment using your server: Check the response integrity by verifying the hash on your server
             [self verifyPayment:lyraResponse];

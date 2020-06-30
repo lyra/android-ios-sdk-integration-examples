@@ -43,11 +43,11 @@ class ServerCommunication {
     /// This method send to your merchant server the information necessary for create the request to execute the payment using the Payment SDK.
     ///
     /// - Parameter onGetContextCompletion: The completion block to be executed after the getProcessPaymentContext has finished.
-    func getPaymentContext(onGetContextCompletion: @escaping (_ getContextSuccess: Bool, _ serverAnswer: String?) -> Void) {
+    func getPaymentContext(onGetContextCompletion: @escaping (_ getContextSuccess: Bool, _ formToken: String?, _ error: NSError?) -> Void) {
         
         //create request
         guard let serverUrl = NSURL(string: "\(kMerchantServerUrl)/createPayment") else {
-            onGetContextCompletion(false, nil)
+            onGetContextCompletion(false, nil, nil)
             return
         }
         //Create dictionary with params. Check API REST integration documentation
@@ -69,20 +69,21 @@ class ServerCommunication {
             request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
             
         } catch {
-            onGetContextCompletion(false, nil)
+            onGetContextCompletion(false, nil, nil)
             return
         }
-        // Call server to obtain a create payment response
+        // Call server to obtain a formToken
         let task = URLSession.shared.dataTask(with: request) { (data: Data?, _: URLResponse?, error: Error?) in
             if error != nil || data == nil {
-                onGetContextCompletion(false, nil)
+                onGetContextCompletion(false, nil, error! as NSError)
             }
             if let json = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers),
-                let jsonData = try? JSONSerialization.data(withJSONObject: json),
-                let serverAnswer = String(data: jsonData, encoding: .utf8) {
-                onGetContextCompletion(true, serverAnswer)
+                let objectResponse = json as? [String: Any],
+                let serverResponse = objectResponse["answer"] as? [String: Any] {
+                ServerCommunication.extractFormToken(serverResponse, completion: onGetContextCompletion)
             } else {
-                onGetContextCompletion(false, nil)
+                //Handle error in request for obtain a formToken
+                onGetContextCompletion(false, nil, nil)
             }
         }
         task.resume()
@@ -123,5 +124,23 @@ class ServerCommunication {
             }
         }
         task.resume()
+    }
+
+    /// This method extract formToken from the given serverResponse.
+    /// - Parameters:
+    ///   - serverResponse: String that correspond with the ServerResponse.
+    ///   - completion: The completion block to be execute after the formToken is getted.
+    private static func extractFormToken( _ serverResponse: [String: Any], completion: @escaping (Bool, String, NSError?) -> Void) {
+        if let formToken = serverResponse["formToken"] as? String {
+            completion(true, formToken, nil)
+        } else if let errorCode = serverResponse["errorCode"] as? String {
+            let errorMsg = serverResponse["errorMessage"] as? String
+            let detailErrorCode = serverResponse["detailedErrorCode"] as? String
+            let detailErrorMsg = serverResponse["detailedErrorMessage"] as? String
+            let message = "Error Code: \(errorCode)" + "\n" + "Error Message: \(errorMsg ?? "")" + "\n" + "Error Detail Code: \(detailErrorCode ?? "")" + "\n" + "Error Detail Message: \(detailErrorMsg ?? "")"
+            completion(false, "", NSError(domain: "com.lyra.server.communication", code: 1, userInfo: [NSLocalizedFailureReasonErrorKey: message]))
+        } else {
+            completion(false, "", NSError(domain: "com.lyra.server.communication", code: 2, userInfo: [NSLocalizedFailureReasonErrorKey: "Invalid formToken"]))
+        }
     }
 }
