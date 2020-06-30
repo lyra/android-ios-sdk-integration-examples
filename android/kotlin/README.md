@@ -80,8 +80,10 @@ requestQueue.add(JsonObjectRequest(Request.Method.POST,
             "${SERVER_URL}/createPayment",
             paymentParams,
             Response.Listener { response ->
-                //In this sample, the processPayment checks the response and will call the process method of the SDK if the response is good.
-                processPayment(response.toString())
+                //In this sample, we call processServerResponse() which execute the process method of the SDK with the formToken extracted from the serverResponse
+		 val answer = JSONObject(response).getJSONObject("answer")
+                val formToken = answer.getString("formToken")
+                processServerResponse(formToken)
             },
             Response.ErrorListener { error ->
                 //Please manage your application error behavior here
@@ -96,10 +98,10 @@ requestQueue.add(JsonObjectRequest(Request.Method.POST,
 
 In this sample, in case of error calling the server, a toast will be displayed with the error text.
   
-Otherwise, the `processPayment` method is called with the server response. The server response is checked and the `process` SDK method is called.
+Otherwise, the `processServerResponse` method is executed with the formToken and the `process` SDK method is called.
 
 ```kotlin
-Lyra.process(supportFragmentManager, createResponse!!, object : LyraHandler {
+Lyra.process(supportFragmentManager, formToken, object : LyraHandler {
             override fun onSuccess(lyraResponse: LyraResponse) {
                 //Check the response integrity by verifying the hash on your server
                 verifyPayment(lyraResponse)
