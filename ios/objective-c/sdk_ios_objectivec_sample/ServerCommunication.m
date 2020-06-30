@@ -71,8 +71,9 @@ bool const askRegisterPay = false;
                 onGetPaymentContextCompletion(false, nil, error);
             } else {
                 NSError *parseError = nil;
-                NSDictionary *serverResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-                if (serverResponse != nil)
+                NSDictionary *objectResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+                NSDictionary *serverResponse = [objectResponse objectForKey:@"answer"];
+				if (serverResponse != nil)
                     [self extractFormToken:serverResponse onExtractFormCompletion:onGetPaymentContextCompletion];
                 else
                     onGetPaymentContextCompletion(false, nil, parseError);

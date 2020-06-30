@@ -87,7 +87,8 @@ ServerCommunication *serverComunication = [[ServerCommunication alloc] init];
 // 2. Execute getPaymentContext for get the formToken (required param in SDK process method)
 [_serverComunication getProcessPaymentContext:^(BOOL getContextSuccess, NSString *formToken, NSError* error) {
 ...
-NSDictionary *serverResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+NSDictionary *objectResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+NSDictionary *serverResponse = [objectResponse objectForKey:@"answer"];
 NSString* formToken = (NSString*)[serverResponse objectForKey:@"formToken"];
      
  }];
@@ -98,9 +99,9 @@ In this sample, in case of error calling the server, a message will be displayed
 Otherwise, the `process` method is called with the formToken. The formToken is checked and the `process` SDK method is called.
 
 ```objectivec
- [Lyra processWithContextViewController:self formToken:formToken error:&error onSuccess:^(LyraResponse *lyraResponse) {
+  [Lyra process:self :formToken error:&errorInProcess onSuccess:^(LyraResponse *lyraResponse) {
 
-	//Verify the payment using your server: Check the response integrity by 	verifying the hash on your server
+	//Verify the payment using your server: Check the response integrity by verifying the hash on your server
 	[self verifyPayment:lyraResponse];
             
 	} onError:^(LyraError *lyraError, LyraResponse *lyraResponse) {

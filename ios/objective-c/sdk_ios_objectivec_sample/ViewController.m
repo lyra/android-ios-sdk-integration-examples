@@ -32,14 +32,14 @@
     [_serverComunication getProcessPaymentContext:^(BOOL getContextSuccess, NSString *formToken, NSError* error) {
         if (!getContextSuccess || formToken == nil) {
             //TODO: Handle error in getProcessPaymentContext
-            NSString *errorMessage = error != nil ? [[error userInfo] objectForKey:NSLocalizedFailureReasonErrorKey] :  @"Error getting payment context"
+            NSString *errorMessage = error != nil ? [[error userInfo] objectForKey:NSLocalizedFailureReasonErrorKey] : @"Error getting payment context";
             [self showMessage: errorMessage];
             return;
         }
         //After the payment context has beeen obtained
         // 3. Call the PaymentSDK process method
-        NSError *error = nil;
-        [Lyra processWithContextViewController:self formToken:formToken error:&error onSuccess:^(LyraResponse *lyraResponse) {
+        NSError *errorInProcess = nil;
+        [Lyra process:self :formToken error:&errorInProcess onSuccess:^(LyraResponse *lyraResponse) {
 
             //4. Verify the payment using your server: Check the response integrity by verifying the hash on your server
             [self verifyPayment:lyraResponse];
