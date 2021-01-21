@@ -10,12 +10,17 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
 }
 
@@ -29,7 +34,7 @@ dependencies {
 
     implementation 'com.android.volley:volley:1.1.1'
 
-    implementation 'com.lyra:sdk:1.1.+'
+    implementation 'com.lyra:sdk:1.2.0'
 
     //To be activated if scan card option is set to true
     //implementation 'com.lyra:cards-camera-recognizer:1.0.+'
