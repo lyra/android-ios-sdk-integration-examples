@@ -125,7 +125,7 @@ The SDK will guide the user through the payment process. When the payment succee
 
 ## Technology
 
-Developed in Android Studio 3.5 and written in kotlin v1.3.50, this sample app requires Android API 19 or superior.
+Developed in Android Studio Arctic Fox | 2020.3.1 (JRE Java 11) and written in kotlin v1.6.10, this sample app requires Android API 19 or superior.
 For simplicity reasons, in order to make HTTP request, this example uses [Volley library](https://github.com/google/volley).
 
 ## Troubleshooting
