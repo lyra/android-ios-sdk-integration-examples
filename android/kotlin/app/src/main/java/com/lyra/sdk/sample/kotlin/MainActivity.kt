@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         try {
-            // FIXME: Change by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
+            // FIXME: Change PUBLIC_KEY by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
             Lyra.initialize(applicationContext, PUBLIC_KEY, getOptions())
         } catch (exception: Exception) {
             // handle possible exceptions when initializing SDK (Ex: invalid public key format)
@@ -109,6 +109,7 @@ class MainActivity : AppCompatActivity() {
      * @param view View of the Pay button
      */
     fun onPayClick(view: View) {
+        displayLoadingPanel()
         getPaymentContext(getPaymentParams())
     }
 
@@ -150,6 +151,7 @@ class MainActivity : AppCompatActivity() {
                             processFormToken(extractFormToken(response.toString()))
                         },
                         Response.ErrorListener { error ->
+                            hideLoadingPanel()
                             //Please manage your error behaviour here
                             Toast.makeText(
                                     applicationContext,
@@ -203,20 +205,30 @@ class MainActivity : AppCompatActivity() {
      * @param formToken the formToken extracted from the information of the payment session
      */
     private fun processFormToken(formToken: String) {
-        // Open the payment form
-        Lyra.process(supportFragmentManager, formToken, object : LyraHandler {
-            override fun onSuccess(lyraResponse: LyraResponse) {
-                verifyPayment(lyraResponse)
-            }
+        try {// Open the payment form
+            Lyra.process(supportFragmentManager, formToken, object : LyraHandler {
+                override fun onSuccess(lyraResponse: LyraResponse) {
+                    hideLoadingPanel()
+                    verifyPayment(lyraResponse)
+                }
 
-            override fun onError(lyraException: LyraException, lyraResponse: LyraResponse?) {
-                Toast.makeText(
-                    applicationContext,
-                    "Payment fail: ${lyraException.errorMessage}",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        })
+                override fun onError(lyraException: LyraException, lyraResponse: LyraResponse?) {
+                    hideLoadingPanel()
+                    Toast.makeText(
+                        applicationContext,
+                        "Payment fail: ${lyraException.errorMessage}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+        } catch (e: Exception) {
+            hideLoadingPanel()
+            Toast.makeText(
+                applicationContext,
+                e.message,
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 
     /**
@@ -264,5 +276,20 @@ class MainActivity : AppCompatActivity() {
         headers["Authorization"] =
             "Basic " + Base64.encodeToString(CREDENTIALS.toByteArray(), Base64.NO_WRAP)
         return headers
+    }
+
+
+    /**
+     * Hide the loading panel
+     */
+    fun hideLoadingPanel() {
+        findViewById<View>(R.id.loadingPanel).visibility = View.GONE
+    }
+
+    /**
+     * Display the loading panel
+     */
+    fun displayLoadingPanel() {
+        findViewById<View>(R.id.loadingPanel).visibility = View.VISIBLE
     }
 }
