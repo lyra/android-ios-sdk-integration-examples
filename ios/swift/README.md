@@ -117,7 +117,7 @@ The SDK will guide the user through the payment process. When the payment succee
 
 ## Technology
 
-Developed in Xcode 11.0 and written in Swift 5, this sample app requires iOS 10.0 or superior.
+Developed in Xcode 11.0 and written in Swift 5, this sample app requires iOS 11.0 or superior.
 
 ## Troubleshooting
 

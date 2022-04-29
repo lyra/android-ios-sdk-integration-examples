@@ -13,7 +13,7 @@
 		A64E2F532333B47100E2578A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A64E2F522333B47100E2578A /* Assets.xcassets */; };
 		A64E2F562333B47100E2578A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64E2F542333B47100E2578A /* LaunchScreen.storyboard */; };
 		A64E2F6D2333C2E600E2578A /* ServerCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E2F6C2333C2E600E2578A /* ServerCommunication.swift */; };
-		A6BC68E523ED768D00CCBCA4 /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A6BC68E523ED768D00CCBCA4 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E3B4601F645D23E959634BEA /* Pods_sdk_ios_swift_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B035F1444E7B917DB486910D /* Pods_sdk_ios_swift_sample.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +24,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A6BC68E523ED768D00CCBCA4 /* BuildFile in Embed Frameworks */,
+				A6BC68E523ED768D00CCBCA4 /* (null) in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,7 +301,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -356,7 +356,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

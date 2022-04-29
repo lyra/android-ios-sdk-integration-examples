@@ -22,7 +22,7 @@ The aim of this repository is to explain how to integrate our Payment Mobile SDK
 
 ## Prerequisites
 
-In order to be able to perform a successful payment with our Mobile SDK you must have: 
+In order to be able to perform a successful payment with our Mobile SDK you must have:
 * A contract with your Payment service provider.
 * A deployed server capable to communicate with the payment platform, in order to verify data and create the payment session (please check out java server sample or the integration documentation for more information).
 * Your public key to initialize the SDK. This key can be found in the merchant back-office in Settings -> Shop -> API -> REST API Keys.
@@ -36,7 +36,7 @@ The project build setting 'Always_Embed_Swift_Standard_Libraries' is required in
 
 ### Execute this sample
 
-1. Clone the repo, `git clone REPO_URL`. 
+1. Clone the repo, `git clone REPO_URL`.
 
 2. Install the dependencies using CocoaPods by the following command `pod update`.
 
@@ -57,13 +57,13 @@ The project build setting 'Always_Embed_Swift_Standard_Libraries' is required in
 
 #### Initialize the SDK
 
-It is necessary and important to call the `initialize` method of the SDK on the start of your application. 
+It is necessary and important to call the `initialize` method of the SDK on the start of your application.
 
 ```objectivec
 //Configure SDK options
 NSMutableDictionary *configurationOptions = [[NSMutableDictionary alloc] init];
 [configurationOptions setValue:apiServerName forKey:Lyra.apiServerName];
- 
+
 //Initialize Payment SDK
 [Lyra initialize:publicKey :configurationOptions error:&error];
 ```
@@ -90,12 +90,12 @@ ServerCommunication *serverComunication = [[ServerCommunication alloc] init];
 NSDictionary *objectResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
 NSDictionary *serverResponse = [objectResponse objectForKey:@"answer"];
 NSString* formToken = (NSString*)[serverResponse objectForKey:@"formToken"];
-     
+
  }];
 ```
 
 In this sample, in case of error calling the server, a message will be displayed with the error text.
-  
+
 Otherwise, the `process` method is called with the formToken. The formToken is checked and the `process` SDK method is called.
 
 ```objectivec
@@ -103,24 +103,24 @@ Otherwise, the `process` method is called with the formToken. The formToken is c
 
 	//Verify the payment using your server: Check the response integrity by verifying the hash on your server
 	[self verifyPayment:lyraResponse];
-            
+
 	} onError:^(LyraError *lyraError, LyraResponse *lyraResponse) {
-        
+
 		//TODO: Handle Payment SDK error in process payment request
         [self showMessage: [NSString stringWithFormat:@"Payment fail: %@", lyraError.errorMessage]];
-            
+
 	} error:&error];
 ```
 
-The SDK will guide the user through the payment process. When the payment succeed, you will have to check the response integrity on your server. 
+The SDK will guide the user through the payment process. When the payment succeed, you will have to check the response integrity on your server.
 
 
-*Please check official integration documentation for further information and to check other SDK modes and functionality.* 
+*Please check official integration documentation for further information and to check other SDK modes and functionality.*
 
 
 ## Technology
 
-Developed in Xcode 11.0 and written in Objective-C, this sample app requires iOS 9.0 or superior.
+Developed in Xcode 11.0 and written in Objective-C, this sample app requires iOS 11.0 or superior.
 
 ## Troubleshooting
 
@@ -146,4 +146,3 @@ Check official integration documentation in order to check all possible error co
 	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
-
