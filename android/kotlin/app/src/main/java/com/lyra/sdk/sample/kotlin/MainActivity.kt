@@ -35,10 +35,10 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         // FIXME: change by the right merchant payment server url
-        private const val SERVER_URL = "<REPLACE_ME>" // without / at the end, example https://myserverurl.com
+        private const val SERVER_URL = "https://hellosdkfixed.herokuapp.com" // without / at the end, example https://myserverurl.com
 
         // FIXME: change by your public key
-        private const val PUBLIC_KEY = "<REPLACE_ME>"
+        private const val PUBLIC_KEY = "96964545:testpublickey_vBimvlf1vygdNEsuZwkdqOXZjdN9GvGDnKh0JFSzCEqbN"
 
         // Environment TEST or PRODUCTION, refer to documentation for more information
         // FIXME: change by your targeted environment
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         private const val ASK_REGISTER_PAY = false
 
         // FIXME: Change by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
-        private const val API_SERVER_NAME = "<REPLACE_ME>" // without / at the end, example https://myapiservername.com
+        private const val API_SERVER_NAME = "https://api.payzen.eu" // without / at the end, example https://myapiservername.com
 
         // Payment parameters
         // FIXME: change currency for your targeted environment
@@ -62,8 +62,8 @@ class MainActivity : AppCompatActivity() {
 
         //Basic auth
         // FIXME: set your basic auth credentials
-        private const val SERVER_AUTH_USER = "<REPLACE_ME>"
-        private const val SERVER_AUTH_TOKEN = "<REPLACE_ME>"
+        private const val SERVER_AUTH_USER = "asoler"
+        private const val SERVER_AUTH_TOKEN = "AlexLyra123!"
         private const val CREDENTIALS: String = "$SERVER_AUTH_USER:$SERVER_AUTH_TOKEN"
     }
 
@@ -76,10 +76,10 @@ class MainActivity : AppCompatActivity() {
         options[Lyra.OPTION_API_SERVER_NAME] = API_SERVER_NAME
 
         // android.permission.NFC must be added on AndroidManifest file
-        // options[Lyra.OPTION_NFC_ENABLED] = true
+        options[Lyra.OPTION_NFC_ENABLED] = true
 
         // cards-camera-recognizer dependency must be added on gradle file
-        // options[Lyra.OPTION_CARD_SCANNING_ENABLED] = true
+        options[Lyra.OPTION_CARD_SCANNING_ENABLED] = true
 
         return options
     }
