@@ -1,7 +1,9 @@
 package com.lyra.sdk.sample.kotlin
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Base64
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +16,7 @@ import com.lyra.sdk.Lyra
 import com.lyra.sdk.callback.LyraHandler
 import com.lyra.sdk.callback.LyraResponse
 import com.lyra.sdk.exception.LyraException
+import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
 /**
@@ -81,6 +84,9 @@ class MainActivity : AppCompatActivity() {
         // cards-camera-recognizer dependency must be added on gradle file
         // options[Lyra.OPTION_CARD_SCANNING_ENABLED] = true
 
+
+
+
         return options
     }
 
@@ -96,6 +102,7 @@ class MainActivity : AppCompatActivity() {
         try {
             // FIXME: Change PUBLIC_KEY by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
             Lyra.initialize(applicationContext, PUBLIC_KEY, getOptions())
+            sdkVersion.text = Lyra.sdkVersion
         } catch (exception: Exception) {
             // handle possible exceptions when initializing SDK (Ex: invalid public key format)
         }
@@ -221,6 +228,7 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                 }
             })
+
         } catch (e: Exception) {
             hideLoadingPanel()
             Toast.makeText(
