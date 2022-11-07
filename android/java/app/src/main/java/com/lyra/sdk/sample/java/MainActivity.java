@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
             public void onError(LyraException e, LyraResponse lyraResponse) {
                 Toast.makeText(getApplicationContext(), "Payment fail: " + e.getErrorMessage(), Toast.LENGTH_LONG).show();
             }
-        });
+        }, new HashMap<>());
     }
 
     /**
