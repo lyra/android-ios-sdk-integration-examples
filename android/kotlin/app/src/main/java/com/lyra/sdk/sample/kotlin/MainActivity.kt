@@ -1,9 +1,7 @@
 package com.lyra.sdk.sample.kotlin
 
 import android.os.Bundle
-import android.os.Handler
 import android.util.Base64
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +14,7 @@ import com.lyra.sdk.Lyra
 import com.lyra.sdk.callback.LyraHandler
 import com.lyra.sdk.callback.LyraResponse
 import com.lyra.sdk.exception.LyraException
-import kotlinx.android.synthetic.main.activity_main.*
+import com.lyra.sdk.sample.kotlin.databinding.ActivityMainBinding
 import org.json.JSONObject
 
 /**
@@ -36,56 +34,20 @@ import org.json.JSONObject
  */
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        // FIXME: change by the right merchant payment server url
-        private const val SERVER_URL = "<REPLACE_ME>" // without / at the end, example https://myserverurl.com
-
-        // FIXME: change by your public key
-        private const val PUBLIC_KEY = "<REPLACE_ME>"
-
-        // Environment TEST or PRODUCTION, refer to documentation for more information
-        // FIXME: change by your targeted environment
-        private const val PAYMENT_MODE = "TEST"
-
-        // TRUE to display a "register the card" switch in the payment form
-        private const val ASK_REGISTER_PAY = false
-
-        // FIXME: Change by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
-        private const val API_SERVER_NAME = "<REPLACE_ME>" // without / at the end, example https://myapiservername.com
-
-        // Payment parameters
-        // FIXME: change currency for your targeted environment
-        private const val CURRENCY = "EUR"
-        private const val AMOUNT = "100"
-        private const val ORDER_ID = ""
-
-        //Customer informations
-        private const val CUSTOMER_EMAIL = "customeremail@domain.com"
-        private const val CUSTOMER_REFERENCE = "customerReference"
-
-        //Basic auth
-        // FIXME: set your basic auth credentials
-        private const val SERVER_AUTH_USER = "<REPLACE_ME>"
-        private const val SERVER_AUTH_TOKEN = "<REPLACE_ME>"
-        private const val CREDENTIALS: String = "$SERVER_AUTH_USER:$SERVER_AUTH_TOKEN"
-    }
-
     // Initialize a new RequestQueue instance
     private lateinit var requestQueue: RequestQueue
+    private lateinit var binding: ActivityMainBinding
 
     private fun getOptions(): HashMap<String, Any> {
         val options = HashMap<String, Any>()
 
-        options[Lyra.OPTION_API_SERVER_NAME] = API_SERVER_NAME
+        options[Lyra.OPTION_API_SERVER_NAME] = Config.API_SERVER_NAME
 
         // android.permission.NFC must be added on AndroidManifest file
         // options[Lyra.OPTION_NFC_ENABLED] = true
 
         // cards-camera-recognizer dependency must be added on gradle file
         // options[Lyra.OPTION_CARD_SCANNING_ENABLED] = true
-
-
-
 
         return options
     }
@@ -98,15 +60,21 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
         try {
             // FIXME: Change PUBLIC_KEY by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
-            Lyra.initialize(applicationContext, PUBLIC_KEY, getOptions())
-            sdkVersion.text = Lyra.sdkVersion
+            Lyra.initialize(applicationContext, Config.PUBLIC_KEY, getOptions())
+            binding.sdkVersion.text = Lyra.sdkVersion
         } catch (exception: Exception) {
             // handle possible exceptions when initializing SDK (Ex: invalid public key format)
+            Toast.makeText(this, "Cant initialize SDK. Please set REPLACE_ME values on Config.kt file.", Toast.LENGTH_LONG).show()
         }
         requestQueue = Volley.newRequestQueue(applicationContext)
+
+        val view = binding.root
+        setContentView(view)
     }
 
     /**
@@ -127,16 +95,16 @@ class MainActivity : AppCompatActivity() {
      */
     private fun getPaymentParams(): JSONObject {
         val json = JSONObject()
-            .put("currency", CURRENCY)
-            .put("amount", AMOUNT)
-            .put("orderId", ORDER_ID)
+            .put("currency", Config.CURRENCY)
+            .put("amount", Config.AMOUNT)
+            .put("orderId", Config.ORDER_ID)
             .put(
                 "customer",
-                JSONObject("{\"email\":$CUSTOMER_EMAIL, \"reference\":$CUSTOMER_REFERENCE}")
+                JSONObject("{\"email\":$Config.CUSTOMER_EMAIL, \"reference\":$Config.CUSTOMER_REFERENCE}")
             )
             .put("formTokenVersion", Lyra.getFormTokenVersion())
-            .put("mode", PAYMENT_MODE)
-        if (ASK_REGISTER_PAY) {
+            .put("mode", Config.PAYMENT_MODE)
+        if (Config.ASK_REGISTER_PAY) {
             json.put("formAction", "ASK_REGISTER_PAY")
         }
         return json
@@ -151,7 +119,7 @@ class MainActivity : AppCompatActivity() {
     private fun getPaymentContext(paymentParams: JSONObject) {
         val jsonObjectRequest: JsonObjectRequest =
                 object : JsonObjectRequest(
-                        Method.POST, "${SERVER_URL}/createPayment",
+                        Method.POST, "${Config.SERVER_URL}/createPayment",
                         paymentParams,
                         Response.Listener { response ->
                             //In this sample, we extract the formToken from the serverResponse, call processServerResponse() which execute the process method of the SDK
@@ -247,7 +215,7 @@ class MainActivity : AppCompatActivity() {
     fun verifyPayment(payload: LyraResponse) {
         val jsonObjectRequest: JsonObjectRequest =
             object : JsonObjectRequest(
-                Method.POST, "${SERVER_URL}/verifyResult",
+                Method.POST, "${Config.SERVER_URL}/verifyResult",
                 payload,
                 Response.Listener { response ->
                     //Check the response integrity by verifying the hash on your server
@@ -282,7 +250,7 @@ class MainActivity : AppCompatActivity() {
             HashMap<String, String>()
         headers["Content-Type"] = "application/json; charset=utf-8"
         headers["Authorization"] =
-            "Basic " + Base64.encodeToString(CREDENTIALS.toByteArray(), Base64.NO_WRAP)
+            "Basic " + Base64.encodeToString(Config.CREDENTIALS.toByteArray(), Base64.NO_WRAP)
         return headers
     }
 
