@@ -16,7 +16,7 @@ import com.lyra.sdk.Lyra
 import com.lyra.sdk.callback.LyraHandler
 import com.lyra.sdk.callback.LyraResponse
 import com.lyra.sdk.exception.LyraException
-import com.lyra.sdk.model.enum.LyraPaymentMethods
+import com.lyra.sdk.model.enums.LyraPaymentMethods
 import com.lyra.sdk.sample.kotlin.databinding.ActivityMainBinding
 import org.json.JSONObject
 
@@ -47,10 +47,10 @@ class MainActivity : AppCompatActivity() {
         options[Lyra.OPTION_API_SERVER_NAME] = Config.API_SERVER_NAME
 
         // android.permission.NFC must be added on AndroidManifest file
-        options[Lyra.OPTION_NFC_ENABLED] = true
+        // options[Lyra.OPTION_NFC_ENABLED] = true
 
         // cards-camera-recognizer dependency must be added on gradle file
-        options[Lyra.OPTION_CARD_SCANNING_ENABLED] = true
+        // options[Lyra.OPTION_CARD_SCANNING_ENABLED] = true
 
         return options
     }
@@ -218,12 +218,10 @@ class MainActivity : AppCompatActivity() {
         try {// Open the payment form
             Lyra.process(supportFragmentManager, formToken, object : LyraHandler {
                 override fun onSuccess(lyraResponse: LyraResponse) {
-                    hideLoadingPanel()
                     verifyPayment(lyraResponse)
                 }
 
                 override fun onError(lyraException: LyraException, lyraResponse: LyraResponse?) {
-                    hideLoadingPanel()
                     Toast.makeText(
                         applicationContext,
                         "Payment fail: ${lyraException.errorMessage}",
@@ -231,9 +229,7 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                 }
             }, processOptions)
-
         } catch (e: Exception) {
-            hideLoadingPanel()
             Toast.makeText(
                 applicationContext,
                 e.message,
