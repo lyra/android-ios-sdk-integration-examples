@@ -14,11 +14,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.wallet.button.ButtonConstants;
+import com.google.android.gms.wallet.button.ButtonOptions;
+import com.google.android.gms.wallet.button.PayButton;
 import com.lyra.sdk.Lyra;
 import com.lyra.sdk.callback.LyraHandler;
 import com.lyra.sdk.callback.LyraResponse;
 import com.lyra.sdk.exception.LyraException;
 import com.lyra.sdk.exception.LyraMobException;
+import com.lyra.sdk.model.enums.LyraPaymentMethods;
+import com.lyra.sdk.sample.java.databinding.ActivityMainBinding;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,40 +47,7 @@ import java.util.Map;
  * @author Lyra Network
  */
 public class MainActivity extends AppCompatActivity {
-    // Merchant server url
-    // FIXME: change by the right payment server
-    private static final String SERVER_URL = "<REPLACE_ME>"; // without / at the end, example https://myserverurl.com
 
-    // Public key
-    // FIXME: change by your public key
-    private static final String PUBLIC_KEY = "<REPLACE_ME>";
-
-    // FIXME: Change by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
-    private static final String API_SERVER_NAME = "<REPLACE_ME>"; // without / at the end, example https://myapiservername.com
-
-    // Environment TEST or PRODUCTION, refer to documentation for more information
-    // FIXME: change by your targeted environment
-    private static final String PAYMENT_MODE = "TEST";
-
-    // FIXME: activate if we want to ask to register the card
-    private static final boolean ASK_REGISTER_PAY = false;
-
-    //Basic auth
-    // FIXME: set your basic auth credentials
-    private static final String SERVER_AUTH_USER = "<REPLACE_ME>";
-    private static final String SERVER_AUTH_TOKEN = "<REPLACE_ME>";
-    private static final String CREDENTIALS = SERVER_AUTH_USER + ":" + SERVER_AUTH_TOKEN;
-
-    // Payment parameters
-    // Change by the desired parameters if necessary
-    private static final String AMOUNT = "100";
-    private static final String CURRENCY = "EUR";
-    private static final String ORDER_ID = "";
-
-    // Customer information parameters
-    // Change by the desired parameters if necessary
-    private static final String CUSTOMER_EMAIL = "";
-    private static final String CUSTOMER_REFERENCE = "";
 
     //Instance of Lyra Mobile SDK
     private Lyra SDK = Lyra.INSTANCE;
@@ -85,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     private HashMap<String, Object> getOptions() {
         HashMap options = new HashMap();
-        options.put(Lyra.OPTION_API_SERVER_NAME, API_SERVER_NAME);
+        options.put(Lyra.OPTION_API_SERVER_NAME, Config.API_SERVER_NAME);
         options.put(Lyra.OPTION_NFC_ENABLED, false);
         options.put(Lyra.OPTION_CARD_SCANNING_ENABLED, false);
         return options;
@@ -100,15 +72,33 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        // Add Google Pay Button
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+
         //Initialize the SDK
         try {
-            SDK.initialize(getApplicationContext(), PUBLIC_KEY, getOptions());
+            SDK.initialize(getApplicationContext(), Config.PUBLIC_KEY, getOptions());
+            binding.sdkVersion.setText(SDK.getSdkVersion());
         } catch (LyraMobException ex) {
             // handle possible exceptions when initializing SDK (Ex: invalid public key format)
+            Toast.makeText(this, "Cant initialize SDK. Please set REPLACE_ME values on Config.kt file.", Toast.LENGTH_LONG).show();
         }
 
+        // Add Google Pay Button
+        PayButton googlePayButton = binding.googlePayButton;
+        googlePayButton.initialize(
+                ButtonOptions.newBuilder()
+                        .setButtonType(ButtonConstants.ButtonType.PLAIN)
+                        .setCornerRadius(10)
+                        .setAllowedPaymentMethods(SDK.getAllowedPaymentMethodsMock())
+                        .build()
+        );
+        googlePayButton.setOnClickListener(this::onGooglePayClick);
+
+
         requestQueue = Volley.newRequestQueue(getApplicationContext());
+        setContentView(binding.getRoot());
     }
 
     /**
@@ -118,8 +108,24 @@ public class MainActivity extends AppCompatActivity {
      * @param view View of the Pay button
      */
     public void onPayClick(View view) {
+        displayLoadingPanel();
         try {
-            getPaymentContext();
+            getPaymentContext(getProcessOptions());
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(), "Unexpected Error", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /**
+     * onPayClick method
+     * Invokes the payment
+     *
+     * @param view View of the Pay button
+     */
+    public void onGooglePayClick(View view) {
+        displayLoadingPanel();
+        try {
+            getPaymentContext(getProcessOptionsDirectGooglePay());
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), "Unexpected Error", Toast.LENGTH_LONG).show();
         }
@@ -129,20 +135,21 @@ public class MainActivity extends AppCompatActivity {
      * Performs the create operation, calling the merchant server.
      * This call creates the session on server and retrieves the payment context that is necessary to continue the process
      */
-    private void getPaymentContext() {
+    private void getPaymentContext(HashMap<String, Object> options) {
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, SERVER_URL + "/createPayment", getPaymentParams(), new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Config.SERVER_URL + "/createPayment", getPaymentParams(), new Response.Listener<JSONObject>() {
             //Process merchant server response
             @Override
             public void onResponse(JSONObject response) {
                 //In this sample, we extract the formToken from the serverResponse, call processServerResponse() which execute the process method of the SDK
-                processFormToken(extractFormToken(response.toString()));
+                processFormToken(extractFormToken(response.toString()), options);
             }
         }, new Response.ErrorListener() {
             //Error when calling merchant server
             @Override
             public void onErrorResponse(VolleyError error) {
                 //Please manage your error behaviour here
+                hideLoadingPanel();
                 Toast.makeText(getApplicationContext(), "Error Creating Payment" + error.getMessage(), Toast.LENGTH_LONG).show();
             }
         }){
@@ -186,7 +193,8 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param formToken the formToken extracted from the information of the payment session
      */
-    private void processFormToken(String formToken) {
+    private void processFormToken(String formToken, HashMap<String, Object> options) {
+        hideLoadingPanel();
         //Call Lyra Mobile SDK
         SDK.process(getSupportFragmentManager(), formToken, new LyraHandler() {
             @Override
@@ -198,7 +206,21 @@ public class MainActivity extends AppCompatActivity {
             public void onError(LyraException e, LyraResponse lyraResponse) {
                 Toast.makeText(getApplicationContext(), "Payment fail: " + e.getErrorMessage(), Toast.LENGTH_LONG).show();
             }
-        }, new HashMap<>());
+        }, options);
+    }
+
+    private HashMap<String, Object> getProcessOptionsDirectGooglePay() {
+        HashMap<String, Object> options = getProcessOptions();
+
+        options.put(Lyra.PAYMENT_METHOD_TYPE, LyraPaymentMethods.GOOGLE_PAY);
+
+        return options;
+    }
+
+    private HashMap<String, Object> getProcessOptions() {
+        HashMap<String, Object> options = new HashMap<String, Object>();
+        // options[Lyra.CUSTOM_PAY_BUTTON_LABEL] = "Hello World"
+        return options;
     }
 
     /**
@@ -207,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
      * @param response information about the result of the operation
      */
     private void verifyPayment(JSONObject response) {
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, SERVER_URL + "/verifyResult", response, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Config.SERVER_URL + "/verifyResult", response, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 //Check the response integrity by verifying the hash on your server
@@ -232,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
     private Map<String, String> constructBasicAuthHeaders() {
         HashMap headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json; charset=utf-8");
-        headers.put("Authorization", "Basic " + Base64.encodeToString(CREDENTIALS.getBytes(), Base64.NO_WRAP));
+        headers.put("Authorization", "Basic " + Base64.encodeToString(Config.CREDENTIALS.getBytes(), Base64.NO_WRAP));
         return headers;
     }
 
@@ -245,25 +267,35 @@ public class MainActivity extends AppCompatActivity {
         JSONObject paymentParams = new JSONObject();
 
         try {
-            paymentParams.put("amount", AMOUNT);
-            paymentParams.put("currency", CURRENCY);
-            paymentParams.put("orderId", ORDER_ID);
+            paymentParams.put("amount", Config.AMOUNT);
+            paymentParams.put("currency", Config.CURRENCY);
+            paymentParams.put("orderId", Config.ORDER_ID);
 
             paymentParams.put("customer",
-                    new JSONObject(String.format("{\"email\":\"%s\", \"reference\":\"%s\"}", CUSTOMER_EMAIL, CUSTOMER_REFERENCE)));
+                    new JSONObject(String.format("{\"email\":\"%s\", \"reference\":\"%s\"}", Config.CUSTOMER_EMAIL, Config.CUSTOMER_REFERENCE)));
 
-            if (ASK_REGISTER_PAY) {
+            if (Config.ASK_REGISTER_PAY) {
                 paymentParams.put("formAction", "ASK_REGISTER_PAY");
             }
 
             // FIXME: add all your payment params here. Check integration documentation for further information
 
             paymentParams.put("formTokenVersion", SDK.getFormTokenVersion());
-            paymentParams.put("mode", PAYMENT_MODE);
+            paymentParams.put("mode", Config.PAYMENT_MODE);
         } catch (JSONException ex) {
             // FIXME: handle possible exceptions when constructing JSON
         }
 
         return paymentParams;
+    }
+    /**
+     * Display the loading panel
+     */
+    private void displayLoadingPanel() {
+        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+    }
+
+    private void hideLoadingPanel() {
+        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
     }
 }
