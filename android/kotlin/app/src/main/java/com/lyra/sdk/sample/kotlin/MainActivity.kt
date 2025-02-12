@@ -10,10 +10,13 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.gms.wallet.button.ButtonConstants
+import com.google.android.gms.wallet.button.ButtonOptions
 import com.lyra.sdk.Lyra
 import com.lyra.sdk.callback.LyraHandler
 import com.lyra.sdk.callback.LyraResponse
 import com.lyra.sdk.exception.LyraException
+import com.lyra.sdk.model.enums.LyraPaymentMethods
 import com.lyra.sdk.sample.kotlin.databinding.ActivityMainBinding
 import org.json.JSONObject
 
@@ -38,8 +41,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var requestQueue: RequestQueue
     private lateinit var binding: ActivityMainBinding
 
-    private fun getOptions(): HashMap<String, Any> {
-        val options = HashMap<String, Any>()
+    private fun getOptions(): HashMap<String, Any?> {
+        val options = HashMap<String, Any?>()
 
         options[Lyra.OPTION_API_SERVER_NAME] = Config.API_SERVER_NAME
 
@@ -73,9 +76,40 @@ class MainActivity : AppCompatActivity() {
         }
         requestQueue = Volley.newRequestQueue(applicationContext)
 
+
+        // Add Google Pay Button
+        val googlePayButton = binding.googlePayButton
+
+        googlePayButton.initialize(
+            ButtonOptions
+                .newBuilder()
+                .setButtonType(ButtonConstants.ButtonType.PLAIN)
+                .setCornerRadius(10)
+                .setAllowedPaymentMethods(Lyra.getAllowedPaymentMethodsMock())
+                .build()
+        )
+
+        googlePayButton.setOnClickListener {
+            displayLoadingPanel()
+            getPaymentContext(getPaymentParams(), getProcessOptionsDirectGooglePay())
+        }
+
         val view = binding.root
         setContentView(view)
     }
+
+    private fun getProcessOptionsDirectGooglePay(): HashMap<String, Any?> {
+        val options = getProcessOptions()
+        options[Lyra.PAYMENT_METHOD_TYPE] = LyraPaymentMethods.GOOGLE_PAY
+        return options
+    }
+
+    private fun getProcessOptions(): HashMap<String, Any?> {
+        val options = HashMap<String, Any?>()
+        // options[Lyra.CUSTOM_PAY_BUTTON_LABEL] = "Hello World"
+        return options
+    }
+
 
     /**
      * onPayClick method
@@ -85,7 +119,7 @@ class MainActivity : AppCompatActivity() {
      */
     fun onPayClick(view: View) {
         displayLoadingPanel()
-        getPaymentContext(getPaymentParams())
+        getPaymentContext(getPaymentParams(), getProcessOptions())
     }
 
     /**
@@ -100,7 +134,7 @@ class MainActivity : AppCompatActivity() {
             .put("orderId", Config.ORDER_ID)
             .put(
                 "customer",
-                JSONObject("{\"email\":$Config.CUSTOMER_EMAIL, \"reference\":$Config.CUSTOMER_REFERENCE}")
+                JSONObject("{\"email\":${Config.CUSTOMER_EMAIL}, \"reference\":${Config.CUSTOMER_REFERENCE}}")
             )
             .put("formTokenVersion", Lyra.getFormTokenVersion())
             .put("mode", Config.PAYMENT_MODE)
@@ -116,34 +150,34 @@ class MainActivity : AppCompatActivity() {
      *
      * @param paymentParams the operation parameters
      */
-    private fun getPaymentContext(paymentParams: JSONObject) {
+    private fun getPaymentContext(paymentParams: JSONObject, processOptions: HashMap<String, Any?>) {
         val jsonObjectRequest: JsonObjectRequest =
                 object : JsonObjectRequest(
                         Method.POST, "${Config.SERVER_URL}/createPayment",
                         paymentParams,
                         Response.Listener { response ->
                             //In this sample, we extract the formToken from the serverResponse, call processServerResponse() which execute the process method of the SDK
-                            processFormToken(extractFormToken(response.toString()))
+                            processFormToken(extractFormToken(response.toString()), processOptions)
                         },
                         Response.ErrorListener { error ->
                             hideLoadingPanel()
                             //Please manage your error behaviour here
                             Toast.makeText(
-                                    applicationContext,
-                                    "Error Creating Payment",
-                                    Toast.LENGTH_LONG
+                                applicationContext,
+                                "Error Creating Payment: $error",
+                                Toast.LENGTH_LONG
                             ).show()
                         }
 
-                ) {
-                    /**
-                     * Passing some request headers
-                     */
-                    @Throws(AuthFailureError::class)
-                    override fun getHeaders(): Map<String, String> {
-                        return constructBasicAuthHeaders()
-                    }
+            ) {
+                /**
+                 * Passing some request headers
+                 */
+                @Throws(AuthFailureError::class)
+                override fun getHeaders(): Map<String, String> {
+                    return constructBasicAuthHeaders()
                 }
+            }
 
         requestQueue.add(jsonObjectRequest)
     }
@@ -160,7 +194,7 @@ class MainActivity : AppCompatActivity() {
                 // TODO Please manage your error behaviour here
                 // in this case, an error is present in the serverResponse, check the returned errorCode errorMessage
                 Toast.makeText(applicationContext, "extractFormToken() -> formToken is empty" + "\n" +
-                        "errorCode = " + answer.getString("errorCode")!! + "\n" +
+                        "errorCode = " + answer.getString("errorCode") + "\n" +
                         "errorMessage = " + answer.optString("errorMessage") + "\n" +
                         "detailedErrorCode = " + answer.optString("detailedErrorCode") + "\n" +
                         "detailedErrorMessage = " + answer.optString("detailedErrorMessage"), Toast.LENGTH_LONG).show()
@@ -179,26 +213,23 @@ class MainActivity : AppCompatActivity() {
      *
      * @param formToken the formToken extracted from the information of the payment session
      */
-    private fun processFormToken(formToken: String) {
+    private fun processFormToken(formToken: String, processOptions: HashMap<String, Any?>) {
+        hideLoadingPanel()
         try {// Open the payment form
             Lyra.process(supportFragmentManager, formToken, object : LyraHandler {
                 override fun onSuccess(lyraResponse: LyraResponse) {
-                    hideLoadingPanel()
                     verifyPayment(lyraResponse)
                 }
 
                 override fun onError(lyraException: LyraException, lyraResponse: LyraResponse?) {
-                    hideLoadingPanel()
                     Toast.makeText(
                         applicationContext,
                         "Payment fail: ${lyraException.errorMessage}",
                         Toast.LENGTH_LONG
                     ).show()
                 }
-            })
-
+            }, processOptions)
         } catch (e: Exception) {
-            hideLoadingPanel()
             Toast.makeText(
                 applicationContext,
                 e.message,
