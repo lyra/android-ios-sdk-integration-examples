@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var requestQueue: RequestQueue
     private lateinit var binding: ActivityMainBinding
 
-    private fun getOptions(): HashMap<String, Any> {
-        val options = HashMap<String, Any>()
+    private fun getOptions(): HashMap<String, Any?> {
+        val options = HashMap<String, Any?>()
 
         options[Lyra.OPTION_API_SERVER_NAME] = Config.API_SERVER_NAME
 
@@ -98,14 +98,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
     }
 
-    private fun getProcessOptionsDirectGooglePay(): HashMap<String, Any> {
+    private fun getProcessOptionsDirectGooglePay(): HashMap<String, Any?> {
         val options = getProcessOptions()
         options[Lyra.PAYMENT_METHOD_TYPE] = LyraPaymentMethods.GOOGLE_PAY
         return options
     }
 
-    private fun getProcessOptions(): HashMap<String, Any> {
-        val options = HashMap<String, Any>()
+    private fun getProcessOptions(): HashMap<String, Any?> {
+        val options = HashMap<String, Any?>()
         // options[Lyra.CUSTOM_PAY_BUTTON_LABEL] = "Hello World"
         return options
     }
@@ -150,7 +150,7 @@ class MainActivity : AppCompatActivity() {
      *
      * @param paymentParams the operation parameters
      */
-    private fun getPaymentContext(paymentParams: JSONObject, processOptions: HashMap<String, Any>) {
+    private fun getPaymentContext(paymentParams: JSONObject, processOptions: HashMap<String, Any?>) {
         val jsonObjectRequest: JsonObjectRequest =
                 object : JsonObjectRequest(
                         Method.POST, "${Config.SERVER_URL}/createPayment",
@@ -213,7 +213,7 @@ class MainActivity : AppCompatActivity() {
      *
      * @param formToken the formToken extracted from the information of the payment session
      */
-    private fun processFormToken(formToken: String, processOptions: HashMap<String, Any>) {
+    private fun processFormToken(formToken: String, processOptions: HashMap<String, Any?>) {
         hideLoadingPanel()
         try {// Open the payment form
             Lyra.process(supportFragmentManager, formToken, object : LyraHandler {
