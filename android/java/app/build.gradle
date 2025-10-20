@@ -3,9 +3,9 @@ apply plugin: 'com.android.application'
 android {
     defaultConfig {
         applicationId "com.lyra.sdk.sample.java"
-        minSdkVersion 21
-        compileSdk 35
-        targetSdkVersion 35
+        minSdkVersion 23
+        compileSdkVersion 36
+        targetSdkVersion 36
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -25,16 +25,16 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     testImplementation 'junit:junit:4.13.2'
 
     implementation 'com.android.volley:volley:1.2.1'
 
-    implementation 'com.lyra:sdk:1.9.8'
+    implementation 'com.lyra:sdk:1.11.0'
 
     // Google Pay
-    implementation 'com.google.android.gms:play-services-wallet:19.4.0'
+    implementation 'com.google.android.gms:play-services-wallet:19.5.0'
 
     //To be activated if scan card option is set to true
     //implementation 'com.lyra:cards-camera-recognizer:1.0.+'
