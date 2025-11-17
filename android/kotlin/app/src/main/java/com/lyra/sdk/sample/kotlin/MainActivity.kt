@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         try {
             // FIXME: Change PUBLIC_KEY by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
             Lyra.initialize(applicationContext, Config.PUBLIC_KEY, getOptions())
-            binding.sdkVersion.text = Lyra.sdkVersion
+            binding.sdkVersion.text = Lyra.getSDKVersion()
         } catch (exception: Exception) {
             // handle possible exceptions when initializing SDK (Ex: invalid public key format)
             Toast.makeText(this, "Cant initialize SDK. Please set REPLACE_ME values on Config.kt file.", Toast.LENGTH_LONG).show()

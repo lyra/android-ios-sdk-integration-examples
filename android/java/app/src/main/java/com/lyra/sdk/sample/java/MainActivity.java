@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         //Initialize the SDK
         try {
             SDK.initialize(getApplicationContext(), Config.PUBLIC_KEY, getOptions());
-            binding.sdkVersion.setText(SDK.getSdkVersion());
+            binding.sdkVersion.setText(SDK.getSDKVersion());
         } catch (LyraMobException ex) {
             // handle possible exceptions when initializing SDK (Ex: invalid public key format)
             Toast.makeText(this, "Cant initialize SDK. Please set REPLACE_ME values on Config.kt file.", Toast.LENGTH_LONG).show();
