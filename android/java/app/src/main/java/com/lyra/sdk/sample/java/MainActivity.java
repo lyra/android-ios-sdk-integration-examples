@@ -82,17 +82,18 @@ public class MainActivity extends AppCompatActivity {
       binding.sdkVersion.setText(SDK.getSDKVersion());
     } catch (LyraMobException ex) {
       // handle possible exceptions when initializing SDK (Ex: invalid public key format)
-      Toast.makeText(this, "Cant initialize SDK. Please set REPLACE_ME values on Config.kt file.", Toast.LENGTH_LONG).show();
+      Toast.makeText(
+        this, "Cant initialize SDK. Please set REPLACE_ME values on Config.kt file.", Toast.LENGTH_LONG).show();
     }
 
     // Add Google Pay Button
     PayButton googlePayButton = binding.googlePayButton;
     googlePayButton.initialize(
       ButtonOptions.newBuilder()
-        .setButtonType(ButtonConstants.ButtonType.PLAIN)
-        .setCornerRadius(10)
-        .setAllowedPaymentMethods(SDK.getAllowedPaymentMethodsMock())
-        .build()
+                   .setButtonType(ButtonConstants.ButtonType.PLAIN)
+                   .setCornerRadius(10)
+                   .setAllowedPaymentMethods(SDK.getAllowedPaymentMethodsMock())
+                   .build()
     );
     googlePayButton.setOnClickListener(this::onGooglePayClick);
 
@@ -137,20 +138,23 @@ public class MainActivity extends AppCompatActivity {
    */
   private void getPaymentContext(HashMap<String, Object> options) {
 
-    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Config.SERVER_URL + "/createPayment", getPaymentParams(), new Response.Listener<JSONObject>() {
-      //Process merchant server response
-      @Override
-      public void onResponse(JSONObject response) {
-        //In this sample, we extract the formToken from the serverResponse, call processServerResponse() which execute the process method of the SDK
-        processFormToken(extractFormToken(response.toString()), options);
-      }
-    }, new Response.ErrorListener() {
+    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+      Request.Method.POST, Config.SERVER_URL + "/createPayment", getPaymentParams(),
+      new Response.Listener<JSONObject>() {
+        //Process merchant server response
+        @Override
+        public void onResponse(JSONObject response) {
+          //In this sample, we extract the formToken from the serverResponse, call processServerResponse() which execute the process method of the SDK
+          processFormToken(extractFormToken(response.toString()), options);
+        }
+      }, new Response.ErrorListener() {
       //Error when calling merchant server
       @Override
       public void onErrorResponse(VolleyError error) {
         //Please manage your error behaviour here
         hideLoadingPanel();
-        Toast.makeText(getApplicationContext(), "Error Creating Payment" + error.getMessage(), Toast.LENGTH_LONG).show();
+        Toast.makeText(
+          getApplicationContext(), "Error Creating Payment" + error.getMessage(), Toast.LENGTH_LONG).show();
       }
     }) {
       @Override
@@ -173,11 +177,12 @@ public class MainActivity extends AppCompatActivity {
       if (formToken.equals("")) {
         // TODO Please manage your error behaviour here
         // in this case, an error is present in the serverResponse, check the returned errorCode errorMessage
-        Toast.makeText(getApplicationContext(), "extractFormToken() -> formToken is empty" + "\n" +
-          "errorCode = " + answer.getString("errorCode") + "\n" +
-          "errorMessage = " + answer.optString("errorMessage") + "\n" +
-          "detailedErrorCode = " + answer.optString("detailedErrorCode") + "\n" +
-          "detailedErrorMessage = " + answer.optString("detailedErrorMessage"), Toast.LENGTH_LONG).show();
+        Toast.makeText(
+          getApplicationContext(), "extractFormToken() -> formToken is empty" + "\n" +
+            "errorCode = " + answer.getString("errorCode") + "\n" +
+            "errorMessage = " + answer.optString("errorMessage") + "\n" +
+            "detailedErrorCode = " + answer.optString("detailedErrorCode") + "\n" +
+            "detailedErrorMessage = " + answer.optString("detailedErrorMessage"), Toast.LENGTH_LONG).show();
       }
       return formToken;
     } catch (Throwable throwable) {
@@ -196,17 +201,18 @@ public class MainActivity extends AppCompatActivity {
   private void processFormToken(String formToken, HashMap<String, Object> options) {
     hideLoadingPanel();
     //Call Lyra Mobile SDK
-    SDK.process(getSupportFragmentManager(), formToken, new LyraHandler() {
-      @Override
-      public void onSuccess(LyraResponse lyraResponse) {
-        verifyPayment(lyraResponse);
-      }
+    SDK.process(
+      getSupportFragmentManager(), formToken, new LyraHandler() {
+        @Override
+        public void onSuccess(LyraResponse lyraResponse) {
+          verifyPayment(lyraResponse);
+        }
 
-      @Override
-      public void onError(LyraException e, LyraResponse lyraResponse) {
-        Toast.makeText(getApplicationContext(), "Payment fail: " + e.getErrorMessage(), Toast.LENGTH_LONG).show();
-      }
-    }, options);
+        @Override
+        public void onError(LyraException e, LyraResponse lyraResponse) {
+          Toast.makeText(getApplicationContext(), "Payment fail: " + e.getErrorMessage(), Toast.LENGTH_LONG).show();
+        }
+      }, options);
   }
 
   private HashMap<String, Object> getProcessOptionsDirectGooglePay() {
@@ -229,7 +235,8 @@ public class MainActivity extends AppCompatActivity {
    * @param response information about the result of the operation
    */
   private void verifyPayment(JSONObject response) {
-    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Config.SERVER_URL + "/verifyResult", response, new Response.Listener<JSONObject>() {
+    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+      Request.Method.POST, Config.SERVER_URL + "/verifyResult", response, new Response.Listener<JSONObject>() {
       @Override
       public void onResponse(JSONObject response) {
         //Check the response integrity by verifying the hash on your server
@@ -271,8 +278,10 @@ public class MainActivity extends AppCompatActivity {
       paymentParams.put("currency", Config.CURRENCY);
       paymentParams.put("orderId", Config.ORDER_ID);
 
-      paymentParams.put("customer",
-        new JSONObject(String.format("{\"email\":\"%s\", \"reference\":\"%s\"}", Config.CUSTOMER_EMAIL, Config.CUSTOMER_REFERENCE)));
+      paymentParams.put(
+        "customer",
+        new JSONObject(
+          String.format("{\"email\":\"%s\", \"reference\":\"%s\"}", Config.CUSTOMER_EMAIL, Config.CUSTOMER_REFERENCE)));
 
       if (Config.ASK_REGISTER_PAY) {
         paymentParams.put("formAction", "ASK_REGISTER_PAY");
