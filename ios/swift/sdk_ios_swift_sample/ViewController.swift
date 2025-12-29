@@ -21,24 +21,29 @@ class ViewController: UIViewController {
 
   @IBAction func executeSdkPayment(_ sender: Any) {
 
-    // 2. Execute getPaymentContext for get formToken (required param in SDK process method)
-    serverCommunication.getPaymentContext { (getContextSuccess, formToken, error) in
-      if !getContextSuccess || formToken == nil {
-        //TODO: Handle error in getProcessPaymentContext
-        let message =
-          error != nil ? error!.userInfo[NSLocalizedFailureReasonErrorKey] as? String : "Error getting payment context"
-        self.showMessage(message)
-        return
-      }
-      // After the payment context has been obtained
+    Task {
+
       do {
+        // 2. Get formToken (required param in SDK process method)
+        let formToken = try await self.serverCommunication.getFormToken()
         // 3. Call the PaymentSDK process method
         try Lyra.process(
-          self, formToken!,
+          self, formToken,
           onSuccess: { (_ lyraResponse: LyraResponse) -> Void in
 
             //4. Verify the payment using your server: Check the response integrity by verifying the hash on your server
-            self.verifyPayment(lyraResponse)
+            Task {
+              do {
+                let verified = try await self.serverCommunication
+                  .verifyPayment(lyraResponse)
+
+                self.showMessage(
+                  verified ? "Payment success" : "Payment fail"
+                )
+              } catch {
+                self.showMessage("Verification failed")
+              }
+            }
           },
           onError: { (_ error: LyraError, _ lyraResponse: LyraResponse?) -> Void in
 
@@ -46,10 +51,11 @@ class ViewController: UIViewController {
             self.showMessage("Payment fail: \(error.errorMessage)")
 
           })
-      } catch {
-        //TODO: Handle Payment SDK exceptions
+      } catch let error {
+        self.showMessage(error.localizedDescription)
       }
     }
+
   }
 
   func showMessage(_ message: String?) {
@@ -58,21 +64,6 @@ class ViewController: UIViewController {
       alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
       self.present(alert, animated: true, completion: nil)
     }
-  }
-
-  /// Check the response integrity by verifying the hash on your server
-  /// - Parameter LyraResponse: Response of process payment
-  func verifyPayment(_ lyraResponse: LyraResponse) {
-    serverCommunication.verifyPayment(
-      lyraResponse,
-      onVerifyPaymentCompletion: { (paymentVerified, isConnectionError) in
-
-        if paymentVerified {
-          self.showMessage("Payment success")
-        } else {
-          self.showMessage("Payment verification fail")
-        }
-      })
   }
 
 }
