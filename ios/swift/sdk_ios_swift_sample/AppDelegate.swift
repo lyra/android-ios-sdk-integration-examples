@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     do {
       //Configure SDK options
       var configurationOptions = [String: Any]()
-      configurationOptions[Lyra.apiServerName] = apiServerName
+      configurationOptions[LyraInitOptions.apiServerName] = apiServerName
 
       //uncomment for enable scan card functionality
       //configurationOptions[Lyra.cardScanningEnabled] = true
