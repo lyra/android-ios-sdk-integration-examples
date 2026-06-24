@@ -1,2 +1,20 @@
+dependencyResolutionManagement {
+  repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+  repositories {
+    google()
+    mavenCentral()
+    maven {
+      name = "centralManualTesting"
+      url = uri("https://central.sonatype.com/api/v1/publisher/deployments/download/")
+      credentials(HttpHeaderCredentials) {
+        name = centralManualTestingAuthHeaderName
+        value = centralManualTestingAuthHeaderValue
+      }
+      authentication {
+        header(HttpHeaderAuthentication)
+      }
+    }
+  }
+}
 include ':app'
 rootProject.name='sdk-android-kotlin-sample'
