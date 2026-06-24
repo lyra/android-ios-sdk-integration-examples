@@ -53,21 +53,17 @@ In order to be able to perform a successful payment with our Mobile SDK you must
 It is necessary and important to call the `initialize` method of the SDK on the start of your application. 
 
 ```kotlin
-//Configure SDK options
-val options = HashMap<String, Any>()
-options[Lyra.OPTION_API_SERVER_NAME] = "MY_API_SERVER_NAME"
-
 //Initialize Payment SDK
-Lyra.initialize(applicationContext, PUBLIC_KEY, options)
+Lyra.initialize(applicationContext, PUBLIC_KEY, API_SERVER_NAME, InitOptions())
 ```
 
 The "options" parameter corresponds to a Map that allows you to configure the behavior of the SDK. The expected keys in this dictionary are:
 
-| Key                   | Value format | Description                                                        | Required   |
-| :-------------------- | :----------- | :----------------------------------------------------------------- | :--------|
-| apiServerName         | String       | Your REST API server name that you can find in your back-office.   | Required |
-| cardScanningEnabled   | Bool         | Enable/Disable the scan card functionality. If not set, the functionality will be disable. | Optional |
-| nfcEnabled            | Bool         | Enable/Disable the NFC card functionality. If not set, the functionality will be disable.  | Optional |
+| Key                 | Value format | Description                                                                                | Required   |
+|:--------------------|:-------------|:-------------------------------------------------------------------------------------------| :--------|
+| cardScanningEnabled | Bool         | Enable/Disable the scan card functionality. If not set, the functionality will be disable. | Optional |
+| nfcEnabled          | Bool         | Enable/Disable the NFC card functionality. If not set, the functionality will be disable.  | Optional |
+| theme               | Int          | The ID of the theme file to use for customizing SDK views.                                 | Optional |
 
 
 #### Make a payment
@@ -101,20 +97,15 @@ In this sample, in case of error calling the server, a toast will be displayed w
 Otherwise, the `processServerResponse` method is executed with the formToken and the `process` SDK method is called.
 
 ```kotlin
-Lyra.process(supportFragmentManager, formToken, object : LyraHandler {
-            override fun onSuccess(lyraResponse: LyraResponse) {
-                //Check the response integrity by verifying the hash on your server
-                verifyPayment(lyraResponse)
-            }
-            override fun onError(lyraException: LyraException, lyraResponse: LyraResponse?) {
-                //Manage error here, please refer to the documentation for more information
-                Toast.makeText(
-                    applicationContext,
-                    "Payment fail: ${lyraException.errorMessage}",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        })
+lifecycleScope.launch {
+  try {
+    val lyraResponse = Lyra.process(supportFragmentManager, formToken, processOptions)
+    verifyPayment(lyraResponse)
+  } catch (lyraException: LyraException) {
+    Toast.makeText(applicationContext, "Payment fail: ${lyraException.errorMessage}", Toast.LENGTH_LONG).show()
+  }
+}
+
 ```
 
 The SDK will guide the user through the payment process. When the payment succeed, you will have to check the response integrity on your server. 
