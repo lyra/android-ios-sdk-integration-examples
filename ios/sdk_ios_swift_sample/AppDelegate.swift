@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     do {
       
       //Initialize Payment SDK
-      try Lyra.initialize(publicKey, apiServerName, InitOptions(cardScanningEnabled: true))
+      try Lyra.initialize(publicKey, apiServerName)
     } catch {
       //TODO: Handle Payment SDK initilization error
     }

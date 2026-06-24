@@ -56,9 +56,9 @@ In order to be able to perform a successful payment with our Mobile SDK you must
 It is necessary and important to call the `initialize` method of the SDK on the start of your application. 
 
 ```swift
- try Lyra.initialize(publicKey, apiServerName, InitOptions(cardScanningEnabled: true))
+ try Lyra.initialize(publicKey, apiServerName)
 ```
-The "InitOptions" optional parameter corresponds to an object that allows you to configure the behavior of the SDK. The possibles keys in this dictionary are:
+An optional "InitOptions" object parameter can be sent to `initialize`  to allow you to configure the behavior of the SDK.
 
 | Key             | Value format    | Description                                                        
 | :-------------------- | :-------- | :----------------------------------------------------------------- | 
