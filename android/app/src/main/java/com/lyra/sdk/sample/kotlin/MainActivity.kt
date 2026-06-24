@@ -5,6 +5,7 @@ import android.util.Base64
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.android.volley.AuthFailureError
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -13,11 +14,13 @@ import com.android.volley.toolbox.Volley
 import com.google.android.gms.wallet.button.ButtonConstants
 import com.google.android.gms.wallet.button.ButtonOptions
 import com.lyra.sdk.Lyra
-import com.lyra.sdk.callback.LyraHandler
 import com.lyra.sdk.callback.LyraResponse
 import com.lyra.sdk.exception.LyraException
+import com.lyra.sdk.model.InitOptions
+import com.lyra.sdk.model.ProcessOptions
 import com.lyra.sdk.model.enums.LyraPaymentMethods
 import com.lyra.sdk.sample.kotlin.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 /**
@@ -40,16 +43,12 @@ class MainActivity : AppCompatActivity() {
   private lateinit var requestQueue: RequestQueue
   private lateinit var binding: ActivityMainBinding
 
-  private fun getOptions(): HashMap<String, Any?> {
-    val options = HashMap<String, Any?>()
-
-    options[Lyra.OPTION_API_SERVER_NAME] = Config.API_SERVER_NAME
+  private fun getOptions(): InitOptions {
+    val options = InitOptions()
 
     // android.permission.NFC must be added on AndroidManifest file
-    // options[Lyra.OPTION_NFC_ENABLED] = true
-
-    // cards-camera-recognizer dependency must be added on gradle file
-    // options[Lyra.OPTION_CARD_SCANNING_ENABLED] = true
+    // options.nfcEnabled = true
+    // options.cardScanningEnabled = true
 
     return options
   }
@@ -67,9 +66,9 @@ class MainActivity : AppCompatActivity() {
 
     try {
       // FIXME: Change PUBLIC_KEY by the right REST API Server Name (available in merchant BO: Settings->Shop->REST API Keys)
-      Lyra.initialize(applicationContext, Config.PUBLIC_KEY, getOptions())
+      Lyra.initialize(applicationContext, Config.PUBLIC_KEY, Config.API_SERVER_NAME, getOptions())
       binding.sdkVersion.text = Lyra.getSDKVersion()
-    } catch (exception: Exception) {
+    } catch (_: Exception) {
       // handle possible exceptions when initializing SDK (Ex: invalid public key format)
       Toast.makeText(this, "Cant initialize SDK. Please set REPLACE_ME values on Config.kt file.", Toast.LENGTH_LONG).show()
     }
@@ -96,15 +95,15 @@ class MainActivity : AppCompatActivity() {
     setContentView(view)
   }
 
-  private fun getProcessOptionsDirectGooglePay(): HashMap<String, Any?> {
+  private fun getProcessOptionsDirectGooglePay(): ProcessOptions {
     val options = getProcessOptions()
-    options[Lyra.PAYMENT_METHOD_TYPE] = LyraPaymentMethods.GOOGLE_PAY
+    options.paymentMethodType = LyraPaymentMethods.GOOGLE_PAY
     return options
   }
 
-  private fun getProcessOptions(): HashMap<String, Any?> {
-    val options = HashMap<String, Any?>()
-    // options[Lyra.CUSTOM_PAY_BUTTON_LABEL] = "Hello World"
+  private fun getProcessOptions(): ProcessOptions {
+    val options = ProcessOptions()
+    // options.customPayButtonLabel = "Hello World"
     return options
   }
 
@@ -147,7 +146,7 @@ class MainActivity : AppCompatActivity() {
    *
    * @param paymentParams the operation parameters
    */
-  private fun getPaymentContext(paymentParams: JSONObject, processOptions: HashMap<String, Any?>) {
+  private fun getPaymentContext(paymentParams: JSONObject, processOptions: ProcessOptions) {
     val jsonObjectRequest: JsonObjectRequest =
       object : JsonObjectRequest(
         Method.POST,
@@ -214,36 +213,16 @@ class MainActivity : AppCompatActivity() {
    *
    * @param formToken the formToken extracted from the information of the payment session
    */
-  private fun processFormToken(formToken: String, processOptions: HashMap<String, Any?>) {
+  private fun processFormToken(formToken: String, processOptions: ProcessOptions) {
     hideLoadingPanel()
-    try {
-      // Open the payment form
-      Lyra.process(
-        supportFragmentManager,
-        formToken,
-        object : LyraHandler {
-          override fun onSuccess(lyraResponse: LyraResponse) {
-            verifyPayment(lyraResponse)
-          }
-
-          override fun onError(lyraException: LyraException, lyraResponse: LyraResponse?) {
-            Toast
-              .makeText(
-                applicationContext,
-                "Payment fail: ${lyraException.errorMessage}",
-                Toast.LENGTH_LONG,
-              ).show()
-          }
-        },
-        processOptions,
-      )
-    } catch (e: Exception) {
-      Toast
-        .makeText(
-          applicationContext,
-          e.message,
-          Toast.LENGTH_LONG,
-        ).show()
+    // Open the payment form
+    lifecycleScope.launch {
+      try {
+        val lyraResponse = Lyra.process(supportFragmentManager, formToken, processOptions)
+        verifyPayment(lyraResponse)
+      } catch (lyraException: LyraException) {
+        Toast.makeText(applicationContext, "Payment fail: ${lyraException.errorMessage}", Toast.LENGTH_LONG).show()
+      }
     }
   }
 
