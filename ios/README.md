@@ -77,7 +77,7 @@ let response = try await Lyra.process(self, formToken)
 
 The SDK will guide the user through the payment process. When the payment succeed, you will have to check the response integrity on your server. 
 
-An `ProcessOptions` parameter can be transmitted to the `process` method for customizing the payment.
+An optional `ProcessOptions` parameter can be transmitted to the `process` method for customizing the payment.
 
 
 *Please check official integration documentation for further information and to check other SDK modes and functionality.* 
