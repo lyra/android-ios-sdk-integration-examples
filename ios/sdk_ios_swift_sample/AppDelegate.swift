@@ -25,15 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let apiServerName = "<REPLACE_ME>"  // without / at the end, example https://myapiservername.com
 
     do {
-      //Configure SDK options
-      var configurationOptions = [String: Any]()
-      configurationOptions[LyraInitOptions.apiServerName] = apiServerName
-
-      //uncomment for enable scan card functionality
-      //configurationOptions[Lyra.cardScanningEnabled] = true
-
+      
       //Initialize Payment SDK
-      try Lyra.initialize(publicKey, configurationOptions)
+      try Lyra.initialize(publicKey, apiServerName)
     } catch {
       //TODO: Handle Payment SDK initilization error
     }

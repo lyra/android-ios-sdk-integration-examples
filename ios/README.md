@@ -44,8 +44,6 @@ In order to be able to perform a successful payment with our Mobile SDK you must
 
 4. Edit the following field in `ServerCommunication.swift`:
     - **kMerchantServerUrl**: replace by your merchant server url.
-    - **username**: replace with your user value for basic authentication in merchant server.
-    - **password**: replace with your password value for basic authentication in merchant server.
     
 
 5. Run it and that's all! :)
@@ -58,58 +56,28 @@ In order to be able to perform a successful payment with our Mobile SDK you must
 It is necessary and important to call the `initialize` method of the SDK on the start of your application. 
 
 ```swift
-//Configure SDK options
-var configurationOptions = [String : Any]()
-configurationOptions[Lyra.apiServerName] = apiServerName
-  
-//Initialize Payment SDK
-try Lyra.initialize(publicKey, configurationOptions)
+ try Lyra.initialize(publicKey, apiServerName)
 ```
-The "configurationOptions" parameter corresponds to a Dictionary that allows you to configure the behavior of the SDK. The possibles keys in this dictionary are:
+An optional "InitOptions" object parameter can be sent to `initialize`  to allow you to configure the behavior of the SDK.
 
-| Key             | Value format    | Description                                                        | Required   |
-| :-------------------- | :-------- | :----------------------------------------------------------------- | :--------|
-| apiServerName         | String    | Your REST API server name that you can find in your back-office. | Required |
-| cardScanningEnabled   | Bool    | Enable/Disable the scan card fuctionality. If not set, the functionality will be disable. | Optional |
+| Key             | Value format    | Description                                                        
+| :-------------------- | :-------- | :----------------------------------------------------------------- | 
+|cardScanningEnabled   | Bool    | Enable/Disable the scan card fuctionality. If not set, the functionality will be disable.
+|applePayMerchantName  | String  | Nom de la boutique à afficher sur la fenêtre modale Apple Pay au dessus du montant. Nécessaire pour la prise en charge de Apple Pay.
+|applePayMerchantId    | String  | Numéro de contrat Apple Pay. Nécessaire pour la prise en charge de Apple Pay. 
+|theme                 | String  | Nom du fichier de thème à utiliser pour personnaliser les vues SDK. 
 
 #### Make a payment
 
-Before calling the `process` method of the SDK to process the payment,  it is necessary to, first, create a session using your server.
-In this sample, this is done by the `getPaymentContext` method in ServerCommunication class:
+To proceed with processing the payment using the `process` method of the SDK, you first have to retrieve the `formToken` object from your server. After the `process` method of the SDK is called with the `formToken`:
 
 ```swift
-// 1. Init server comunication class for get createPayment context
-let serverCommunication = ServerCommunication()
-
-// 2. Execute getPaymentContext for get the formToken (required param in SDK process method)
-serverCommunication.getPaymentContext { (getContextSuccess, formToken, error) in
-...
-let objectResponse = json as? [String: Any]
-let serverResponse = objectResponse["answer"] as? [String: Any]
-let formToken = serverResponse["formToken"] as? String 
-
-}
-```
-
-In this sample, in case of error calling the server, a message will be displayed with the error text.
-  
-Otherwise, the `process` method is called with the formToken. The formToken is checked and the `process` SDK method is called.
-
-```swift
-Lyra.process(self, formToken!,
-	onSuccess: { ( _ lyraResponse: LyraResponse) -> Void in
-
-		//Verify the payment using your server: Check the response integrity by verifying the hash on your server
-		self.verifyPayment(lyraResponse)
-	},
-	onError: { (_ error: LyraError, _ lyraResponse: LyraResponse?) -> Void in
-
-		//TODO: Handle Payment SDK error in process payment request
-		self.showMessage("Payment fail: \(error.errorMessage)")
-	})
+let response = try await Lyra.process(self, formToken)
 ```
 
 The SDK will guide the user through the payment process. When the payment succeed, you will have to check the response integrity on your server. 
+
+An optional `ProcessOptions` parameter can be transmitted to the `process` method for customizing the payment.
 
 
 *Please check official integration documentation for further information and to check other SDK modes and functionality.* 

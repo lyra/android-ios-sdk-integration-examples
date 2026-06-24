@@ -54,7 +54,6 @@ class ServerCommunication {
     request.httpBody = jsonParams
     request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
 
-
     let session = URLSession(configuration: .default)
     let (data, _) = try await session.data(for: request)
 

@@ -26,31 +26,18 @@ class ViewController: UIViewController {
       do {
         // 2. Get formToken (required param in SDK process method)
         let formToken = try await self.serverCommunication.getFormToken()
+
         // 3. Call the PaymentSDK process method
-        try Lyra.process(
-          self, formToken,
-          onSuccess: { (_ lyraResponse: LyraResponse) -> Void in
+        let response = try await Lyra.process(self, formToken)
 
-            //4. Verify the payment using your server: Check the response integrity by verifying the hash on your server
-            Task {
-              do {
-                let verified = try await self.serverCommunication
-                  .verifyPayment(lyraResponse)
+        //4. Verify the payment using your server: Check the response integrity by verifying the hash on your server
+        let verified = try await self.serverCommunication.verifyPayment(response)
 
-                self.showMessage(
-                  verified ? "Payment success" : "Payment fail"
-                )
-              } catch {
-                self.showMessage("Verification failed")
-              }
-            }
-          },
-          onError: { (_ error: LyraError, _ lyraResponse: LyraResponse?) -> Void in
-
-            //TODO: Handle Payment SDK error in process payment request
-            self.showMessage("Payment fail: \(error.errorMessage)")
-
-          })
+        self.showMessage(
+          verified ? "Payment success" : "Payment fail"
+        )
+      } catch let error as LyraError {
+        self.showMessage("\(error.errorCode) \(error.errorMessage)")
       } catch let error {
         self.showMessage(error.localizedDescription)
       }
